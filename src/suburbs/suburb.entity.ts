@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, Index } from 'typeorm';
+import { Provider } from 'src/providers/provider.entity';
+import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany } from 'typeorm';
 
 @Entity('suburbs')
 @Index(['name', 'lga_name'], { unique: true })
