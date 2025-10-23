@@ -8,7 +8,7 @@ import { ServiceSubcategory } from 'src/service-subcategories/service-subcategor
 import { Service } from './services.entity';
 
 @Injectable()
-export class Services {
+export class ServicesService {
     constructor(
         @InjectRepository(Service)
         private readonly serviceRepo: Repository<Service>,

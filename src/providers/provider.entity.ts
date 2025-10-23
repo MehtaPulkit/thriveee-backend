@@ -1,5 +1,7 @@
-import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { Profile } from '../profiles/profile.entity';
+import { ProviderSuburb } from 'src/provider-suburbs/provider-suburb.entity';
+import { ProviderService } from 'src/provider-services/provider-service.entity';
 
 @Entity('providers')
 export class Provider {
@@ -33,7 +35,13 @@ export class Provider {
     @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
     updated_at: Date;
 
+    @OneToMany(() => ProviderSuburb, (ps) => ps.provider, { cascade: true })
+    providerSuburbs: ProviderSuburb[];
+
     @OneToOne(() => Profile)
     @JoinColumn({ name: 'id' })
     profile: Profile;
+
+    @OneToMany(() => ProviderService, (providerService) => providerService.provider)
+    providerServices: ProviderService[];
 }

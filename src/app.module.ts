@@ -9,6 +9,8 @@ import { ServiceSubcategoriesModule } from './service-subcategories/service-subc
 import { ServicesModule } from './services/services.module';
 import { ProvidersModule } from './providers/providers.module';
 import { ProfilesModule } from './profiles/profiles.module';
+import { ProviderSuburbsModule } from './provider-suburbs/provider-suburbs.module';
+import { ProviderServicesModule } from './provider-services/provider-services.module';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { ProfilesModule } from './profiles/profiles.module';
     ServicesModule,
     ProvidersModule,
     ProfilesModule,
+    ProviderSuburbsModule,
+    ProviderServicesModule,
   ],
 })
 export class AppModule { }

@@ -5,9 +5,11 @@ import {
     ManyToOne,
     CreateDateColumn,
     JoinColumn,
+    OneToMany,
 } from 'typeorm';
 import { ServiceCategory } from 'src/service-categories/service-categories.entity';
 import { ServiceSubcategory } from 'src/service-subcategories/service-subcategories.entity';
+import { ProviderService } from 'src/provider-services/provider-service.entity';
 
 @Entity('services')
 export class Service {
@@ -46,4 +48,7 @@ export class Service {
     })
     @JoinColumn({ name: 'subcategory_id' })
     subcategory: ServiceSubcategory;
+
+    @OneToMany(() => ProviderService, (providerService) => providerService.service)
+    providerServices: ProviderService[];
 }

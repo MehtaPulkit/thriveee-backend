@@ -10,13 +10,13 @@ import {
     ValidationPipe,
     ParseUUIDPipe,
 } from '@nestjs/common';
-import { Services } from './services.service';
+import { ServicesService } from './services.service';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
 
 @Controller('services')
 export class ServicesController {
-    constructor(private readonly servicesService: Services) { }
+    constructor(private readonly servicesService: ServicesService) { }
 
     @Get()
     findAll() {
