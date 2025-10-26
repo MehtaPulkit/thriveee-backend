@@ -1,5 +1,4 @@
 import { ProviderSuburb } from 'src/provider-suburbs/provider-suburb.entity';
-import { Provider } from 'src/providers/provider.entity';
 import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany } from 'typeorm';
 
 @Entity('suburbs')
@@ -31,7 +30,6 @@ export class Suburb {
         srid: 4326,
     })
     boundary: string;
-    // 👇 Add this line — reverse relation for provider_suburbs
     @OneToMany(() => ProviderSuburb, (providerSuburb) => providerSuburb.suburb)
     providerSuburbs: ProviderSuburb[];
 }

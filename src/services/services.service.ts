@@ -20,9 +20,9 @@ export class ServicesService {
         private readonly subcategoryRepo: Repository<ServiceSubcategory>,
     ) { }
 
-    findAll() {
+    async findAll() {
         return this.serviceRepo.find({
-            where: { is_active: true },
+            // where: { is_active: true },
             relations: ['category', 'subcategory'],
         });
     }

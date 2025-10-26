@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateProviderServiceDto } from './dto/create-provider-service.dto';
@@ -14,7 +14,10 @@ export class ProviderServicesService {
 
     async create(dto: CreateProviderServiceDto) {
         const records = dto.service_ids.map((service_id) =>
-            this.providerServicesRepo.create({ provider_id: dto.provider_id, service_id }),
+            this.providerServicesRepo.create({
+                provider_id: dto.provider_id,
+                service_id,
+            }),
         );
         return this.providerServicesRepo.save(records);
     }
@@ -26,24 +29,34 @@ export class ProviderServicesService {
         });
     }
 
-    async findOne(id: string) {
-        return this.providerServicesRepo.findOne({
-            where: { id },
+    async findByProvider(provider_id: string) {
+        return this.providerServicesRepo.find({
+            where: { provider_id },
             relations: ['provider', 'service'],
         });
     }
 
-    async update(id: string, dto: UpdateProviderServiceDto) {
-        const providerService = await this.findOne(id);
-        if (!providerService) throw new Error('Provider service not found');
-        Object.assign(providerService, dto);
-        return this.providerServicesRepo.save(providerService);
+    async update(dto: UpdateProviderServiceDto) {
+        if (!dto.provider_id) throw new NotFoundException('Provider ID is required');
+
+        // Step 1: Remove all existing mappings for this provider
+        await this.providerServicesRepo.delete({ provider_id: dto.provider_id });
+
+        // Step 2: Recreate new ones
+        const newRecords = dto.service_ids?.map((service_id) =>
+            this.providerServicesRepo.create({
+                provider_id: dto.provider_id,
+                service_id,
+            }),
+        );
+        if (!newRecords || newRecords.length === 0) {
+            return [];
+        }
+        return this.providerServicesRepo.save(newRecords);
     }
 
-    async remove(id: string) {
-        const providerService = await this.findOne(id);
-        if (!providerService) throw new Error('Provider service not found');
-        await this.providerServicesRepo.remove(providerService);
+    async remove(provider_id: string) {
+        await this.providerServicesRepo.delete({ provider_id });
         return { message: 'Deleted successfully' };
     }
 }

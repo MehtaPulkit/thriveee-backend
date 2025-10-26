@@ -35,16 +35,17 @@ export class ProviderSuburbsService {
         await this.providerSuburbsRepo.delete({ provider_id });
 
         // Insert new suburbs
-        const records = dto.suburb_ids.map((suburb_id) =>
+        const records = dto.suburb_ids?.map((suburb_id) =>
             this.providerSuburbsRepo.create({ provider_id, suburb_id }),
         );
+        if (!records || records.length === 0) {
+            return [];
+        }
         return this.providerSuburbsRepo.save(records);
     }
 
-    async remove(id: string) {
-        const record = await this.providerSuburbsRepo.findOne({ where: { id } });
-        if (!record) throw new NotFoundException('Provider-Suburb link not found');
-        await this.providerSuburbsRepo.delete(id);
-        return { message: 'Suburb removed from provider successfully' };
+    async remove(provider_id: string) {
+        await this.providerSuburbsRepo.delete({ provider_id });
+        return { message: 'Deleted successfully' };
     }
 }

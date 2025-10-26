@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Delete, Body, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, Param, Query, Put } from '@nestjs/common';
 import { ProviderSuburbsService } from './provider-suburbs.service';
 import { CreateProviderSuburbDto } from './dto/create-provider-suburb.dto';
+import { UpdateProviderSuburbDto } from './dto/update-provider-suburb.dto';
 
 @Controller('provider-suburbs')
 export class ProviderSuburbsController {
@@ -19,6 +20,11 @@ export class ProviderSuburbsController {
     @Get()
     findOne(@Query('provider_id') providerId: string) {
         return this.service.findByProvider(providerId);
+    }
+
+    @Put(':id')
+    update(@Param('id') id: string, @Body() dto: UpdateProviderSuburbDto) {
+        return this.service.update(id, dto);
     }
 
     @Delete(':id')

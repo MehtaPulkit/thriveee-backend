@@ -27,12 +27,12 @@ export class ProviderServicesController {
 
     @Get(':id')
     findOne(@Param('id') id: string) {
-        return this.providerServicesService.findOne(id);
+        return this.providerServicesService.findByProvider(id);
     }
 
-    @Put(':id')
-    update(@Param('id') id: string, @Body() dto: UpdateProviderServiceDto) {
-        return this.providerServicesService.update(id, dto);
+    @Put()
+    update(@Body() dto: UpdateProviderServiceDto) {
+        return this.providerServicesService.update(dto);
     }
 
     @Delete(':id')

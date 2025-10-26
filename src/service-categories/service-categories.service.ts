@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ServiceCategory } from './service-categories.entity';
@@ -26,7 +26,26 @@ export class ServiceCategoriesService {
 
     async update(id: string, dto: Partial<CreateServiceCategoryDto>) {
         const existing = await this.repo.findOne({ where: { id } });
-        if (!existing) throw new NotFoundException('Category not found');
+        if (!existing) {
+            throw new NotFoundException('Category not found');
+        }
+
+        // Check for duplicate name if changed
+        if (dto.name && dto.name !== existing.name) {
+            const duplicate = await this.repo.findOne({ where: { name: dto.name } });
+            if (duplicate) {
+                throw new ConflictException(`A category with name "${dto.name}" already exists`);
+            }
+        }
+
+        // Check for duplicate slug if changed
+        if (dto.slug && dto.slug !== existing.slug) {
+            const duplicateSlug = await this.repo.findOne({ where: { slug: dto.slug } });
+            if (duplicateSlug) {
+                throw new ConflictException(`A category with slug "${dto.slug}" already exists`);
+            }
+        }
+
         Object.assign(existing, dto);
         return this.repo.save(existing);
     }

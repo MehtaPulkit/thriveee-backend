@@ -1,10 +1,4 @@
-// update-provider-suburb.dto.ts
-import { IsArray, ArrayNotEmpty, ArrayUnique, IsUUID } from 'class-validator';
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateProviderSuburbDto } from './create-provider-suburb.dto';
 
-export class UpdateProviderSuburbDto {
-    @IsArray()
-    @ArrayNotEmpty()
-    @ArrayUnique()
-    @IsUUID('all', { each: true })
-    suburb_ids: string[];
-}
+export class UpdateProviderSuburbDto extends PartialType(CreateProviderSuburbDto) { }
