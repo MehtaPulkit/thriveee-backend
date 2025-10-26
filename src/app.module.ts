@@ -11,6 +11,7 @@ import { ProvidersModule } from './providers/providers.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { ProviderSuburbsModule } from './provider-suburbs/provider-suburbs.module';
 import { ProviderServicesModule } from './provider-services/provider-services.module';
+import { ServiceExplorerModule } from './service-explorer/service-explorer.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { ProviderServicesModule } from './provider-services/provider-services.mo
     ProfilesModule,
     ProviderSuburbsModule,
     ProviderServicesModule,
+    ServiceExplorerModule,
   ],
 })
 export class AppModule { }
