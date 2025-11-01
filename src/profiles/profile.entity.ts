@@ -41,6 +41,9 @@ export class Profile {
     @Column({ nullable: true })
     last_name?: string;
 
+    @Column({ nullable: false, default: false })
+    isActive?: boolean;
+
     @OneToOne(() => Provider, (provider) => provider.profile)
     provider?: Provider;
 }

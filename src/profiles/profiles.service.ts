@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Profile } from './profile.entity';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class ProfilesService {
@@ -13,7 +14,9 @@ export class ProfilesService {
     ) { }
 
     async create(createDto: CreateProfileDto): Promise<Profile> {
-        const profile = this.profilesRepository.create(createDto);
+        const profileId = uuidv4();
+        const createDtoWithId = { ...createDto, id: profileId, };
+        const profile = this.profilesRepository.create(createDtoWithId);
         return this.profilesRepository.save(profile);
     }
 
