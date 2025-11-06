@@ -2,21 +2,52 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+let cachedHandler: any;
 
-  app.enableCors({
-    origin: [
-      'http://localhost:5173',          // local dev
-      'http://localhost:5174',          // local dev
-      'https://www.thriveee.com.au', // production
-    ],
-    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
-    credentials: true,
-  });
+export default async function handler(req: any, res: any) {
+  if (!cachedHandler) {
+    const app = await NestFactory.create(AppModule);
 
+    app.enableCors({
+      origin: [
+        'http://localhost:5173',
+        'http://localhost:5174',
+        'https://www.thriveee.com.au',
+      ],
+      methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+      credentials: true,
+    });
 
-  await app.listen(process.env.PORT ?? 3000);
-  console.log(`🚀 Server running on http://localhost:3000`);
+    await app.init();
+
+    const server = app.getHttpAdapter().getInstance();
+    cachedHandler = server.listeners('request')[0];
+  }
+
+  return cachedHandler(req, res);
 }
-bootstrap();
+
+/**
+ * This runs only in local dev mode.
+ * When you run `npm run start:dev`, it starts a normal Nest server.
+ */
+if (process.env.VERCEL !== '1') {
+  async function bootstrap() {
+    const app = await NestFactory.create(AppModule);
+
+    app.enableCors({
+      origin: [
+        'http://localhost:5173',
+        'http://localhost:5174',
+        'https://www.thriveee.com.au',
+      ],
+      methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+      credentials: true,
+    });
+
+    const port = process.env.PORT ?? 3000;
+    await app.listen(port);
+    console.log(`🚀 Server running on http://localhost:${port}`);
+  }
+  bootstrap();
+}
