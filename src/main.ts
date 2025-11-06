@@ -1,11 +1,12 @@
 // src/main.ts
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { Server } from 'http';
 
-let cachedHandler: any;
+let cachedServer: Server;
 
 export default async function handler(req: any, res: any) {
-  if (!cachedHandler) {
+  if (!cachedServer) {
     const app = await NestFactory.create(AppModule);
 
     app.enableCors({
@@ -20,17 +21,15 @@ export default async function handler(req: any, res: any) {
 
     await app.init();
 
-    const server = app.getHttpAdapter().getInstance();
-    cachedHandler = server.listeners('request')[0];
+    const expressApp = app.getHttpAdapter().getInstance();
+    cachedServer = expressApp;
   }
 
-  return cachedHandler(req, res);
+  // Delegate the request to the NestJS Express app
+  return (cachedServer as any).handle(req, res);
 }
 
-/**
- * This runs only in local dev mode.
- * When you run `npm run start:dev`, it starts a normal Nest server.
- */
+// Local development (non-Vercel)
 if (process.env.VERCEL !== '1') {
   async function bootstrap() {
     const app = await NestFactory.create(AppModule);
