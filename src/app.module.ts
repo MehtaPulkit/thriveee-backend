@@ -3,8 +3,6 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SuburbsModule } from './suburbs/suburbs.module';
 import { ServiceCategoriesModule } from './service-categories/service-categories.module';
-import { ServiceSubcategoriesController } from './service-subcategories/service-subcategories.controller';
-import { ServiceSubcategoriesService } from './service-subcategories/service-subcategories.service';
 import { ServiceSubcategoriesModule } from './service-subcategories/service-subcategories.module';
 import { ServicesModule } from './services/services.module';
 import { ProvidersModule } from './providers/providers.module';
@@ -12,6 +10,7 @@ import { ProfilesModule } from './profiles/profiles.module';
 import { ProviderSuburbsModule } from './provider-suburbs/provider-suburbs.module';
 import { ProviderServicesModule } from './provider-services/provider-services.module';
 import { ServiceExplorerModule } from './service-explorer/service-explorer.module';
+import { SupabaseSyncModule } from './supabase-sync/supabase-sync.module';
 
 @Module({
   imports: [
@@ -36,6 +35,7 @@ import { ServiceExplorerModule } from './service-explorer/service-explorer.modul
     ProviderSuburbsModule,
     ProviderServicesModule,
     ServiceExplorerModule,
+    SupabaseSyncModule,
   ],
 })
 export class AppModule { }
