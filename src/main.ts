@@ -6,30 +6,34 @@ import { Server } from 'http';
 let cachedServer: Server;
 
 export default async function handler(req: any, res: any) {
-  if (!cachedServer) {
-    const app = await NestFactory.create(AppModule);
+  try {
+    if (!cachedServer) {
+      const app = await NestFactory.create(AppModule, { bodyParser: true });
 
-    app.enableCors({
-      origin: [
-        'http://localhost:5173',
-        'http://localhost:5174',
-        'https://www.thriveee.com.au',
-      ],
-      methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
-      credentials: true,
-    });
+      app.enableCors({
+        origin: [
+          'http://localhost:5173',
+          'http://localhost:5174',
+          'https://www.thriveee.com.au',
+        ],
+        methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+        credentials: true,
+      });
 
-    await app.init();
+      await app.init();
 
-    const expressApp = app.getHttpAdapter().getInstance();
-    cachedServer = expressApp;
+      const expressApp = app.getHttpAdapter().getInstance();
+      cachedServer = expressApp;
+    }
+
+    return (cachedServer as any)(req, res); // ✅ Directly call the express handler
+  } catch (err) {
+    console.error('Serverless function crashed:', err);
+    res.status(500).send('Internal Server Error');
   }
-
-  // Delegate the request to the NestJS Express app
-  return (cachedServer as any).handle(req, res);
 }
 
-// Local development (non-Vercel)
+// 👇 Local dev mode (only runs locally)
 if (process.env.VERCEL !== '1') {
   async function bootstrap() {
     const app = await NestFactory.create(AppModule);
@@ -48,5 +52,6 @@ if (process.env.VERCEL !== '1') {
     await app.listen(port);
     console.log(`🚀 Server running on http://localhost:${port}`);
   }
+
   bootstrap();
 }
