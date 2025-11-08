@@ -21,7 +21,7 @@ import { SupabaseSyncModule } from './supabase-sync/supabase-sync.module';
       type: 'postgres',
       url: process.env.DATABASE_URL,
       autoLoadEntities: true,
-      synchronize: true, // ✅ only for dev! Turn off in production
+      synchronize: false, // ✅ only for dev! Turn off in production
       ssl: {
         rejectUnauthorized: false, // ⚠️ required for Supabase
       },
