@@ -11,6 +11,8 @@ import { ProviderSuburbsModule } from './provider-suburbs/provider-suburbs.modul
 import { ProviderServicesModule } from './provider-services/provider-services.module';
 import { ServiceExplorerModule } from './service-explorer/service-explorer.module';
 import { SupabaseSyncModule } from './supabase-sync/supabase-sync.module';
+import { CustomersModule } from './customers/customers.module';
+import { CustomerAddressesModule } from './customer-addresses/customer-addresses.module';
 
 @Module({
   imports: [
@@ -36,6 +38,8 @@ import { SupabaseSyncModule } from './supabase-sync/supabase-sync.module';
     ProviderServicesModule,
     ServiceExplorerModule,
     SupabaseSyncModule,
+    CustomersModule,
+    CustomerAddressesModule,
   ],
 })
 export class AppModule { }

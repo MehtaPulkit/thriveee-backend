@@ -5,6 +5,8 @@ import { Profile } from './profile.entity';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { v4 as uuidv4 } from 'uuid';
+import { Customer } from 'src/customers/customer.entity';
+import { Provider } from 'src/providers/provider.entity';
 
 @Injectable()
 export class ProfilesService {
@@ -14,20 +16,32 @@ export class ProfilesService {
     ) { }
 
     async create(createDto: CreateProfileDto): Promise<Profile> {
-        const profileId = uuidv4();
-        const createDtoWithId = { ...createDto, id: profileId, };
-        const profile = this.profilesRepository.create(createDtoWithId);
-        return this.profilesRepository.save(profile);
+        return await this.profilesRepository.manager.transaction(async (manager) => {
+            const profileId = uuidv4();
+            const createDtoWithId = { ...createDto, id: profileId };
+
+            const profile = manager.create(Profile, createDtoWithId);
+            const savedProfile = await manager.save(Profile, profile);
+            if (createDto.role === 'customer') {
+                const customer = manager.create(Customer, { id: profileId });
+                await manager.save(Customer, customer);
+            } else if (createDto.role === 'provider') {
+                const provider = manager.create(Provider, { id: profileId });
+                await manager.save(Provider, provider);
+            }
+
+            return savedProfile;
+        });
     }
 
     async findAll(): Promise<Profile[]> {
-        return this.profilesRepository.find({ relations: ['provider'] });
+        return this.profilesRepository.find({ relations: ['provider', 'customer'] });
     }
 
     async findOne(id: string): Promise<Profile> {
         const profile = await this.profilesRepository.findOne({
             where: { id },
-            relations: ['provider'],
+            relations: ['provider', 'customer'],
         });
         if (!profile) throw new NotFoundException(`Profile with ID ${id} not found`);
         return profile;
