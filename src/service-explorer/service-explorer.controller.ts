@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { ServiceExplorerService } from './service-explorer.service';
-import { SuburbQueryDto } from './dto/suburb-query.dto';
+import { SuburbIdQueryDto, SuburbNameQueryDto } from './dto/suburb-query.dto';
 import { ApiTags, ApiParam } from '@nestjs/swagger';
 
 @ApiTags('Service Explorer')
@@ -8,9 +8,15 @@ import { ApiTags, ApiParam } from '@nestjs/swagger';
 export class ServiceExplorerController {
     constructor(private readonly serviceExplorerService: ServiceExplorerService) { }
 
-    @Get(':suburbId')
+    @Get('suburb/:suburbId')
     @ApiParam({ name: 'suburbId', type: 'string', description: 'Suburb ID (UUID)' })
-    async getServicesBySuburb(@Param() params: SuburbQueryDto) {
+    async getServicesBySuburb(@Param() params: SuburbIdQueryDto) {
         return this.serviceExplorerService.getServicesBySuburb(params.suburbId);
+    }
+
+    @Get('suburb-name/:suburbName')
+    @ApiParam({ name: 'suburbName', type: 'string', description: 'Suburb Name' })
+    async getServicesBySuburbName(@Param() params: SuburbNameQueryDto) {
+        return this.serviceExplorerService.getServicesBySuburbName(params.suburbName);
     }
 }

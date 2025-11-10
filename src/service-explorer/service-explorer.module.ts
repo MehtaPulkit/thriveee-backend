@@ -7,6 +7,7 @@ import { ProviderService } from '../provider-services/provider-service.entity';
 import { Service } from 'src/services/services.entity';
 import { ServiceCategory } from 'src/service-categories/service-categories.entity';
 import { ServiceSubcategory } from 'src/service-subcategories/service-subcategories.entity';
+import { Suburb } from 'src/suburbs/suburb.entity';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ServiceSubcategory } from 'src/service-subcategories/service-subcategor
       Service,
       ServiceCategory,
       ServiceSubcategory,
+      Suburb
     ]),
   ],
   controllers: [ServiceExplorerController],

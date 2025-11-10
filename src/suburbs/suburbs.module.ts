@@ -9,5 +9,6 @@ import { ProviderSuburb } from 'src/provider-suburbs/provider-suburb.entity';
   imports: [TypeOrmModule.forFeature([Suburb, ProviderSuburb])],
   controllers: [SuburbsController],
   providers: [SuburbsService],
+  exports: [SuburbsService],
 })
 export class SuburbsModule { }

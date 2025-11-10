@@ -1,6 +1,11 @@
-import { IsUUID } from 'class-validator';
+import { IsString, IsUUID } from 'class-validator';
 
-export class SuburbQueryDto {
+export class SuburbIdQueryDto {
     @IsUUID()
     suburbId: string;
+}
+
+export class SuburbNameQueryDto {
+    @IsString()
+    suburbName: string;
 }
