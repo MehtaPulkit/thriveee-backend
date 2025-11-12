@@ -29,18 +29,6 @@ export class Customer {
     @Column({ type: 'text', nullable: true })
     gender?: 'male' | 'female' | 'other';
 
-    @Column({ type: 'text', nullable: true })
-    emergency_contact_name?: string;
-
-    @Column({ type: 'text', nullable: true })
-    emergency_contact_number?: string;
-
-    @Column({ type: 'text', nullable: true })
-    occupation?: string;
-
-    @Column({ type: 'text', nullable: true })
-    notes?: string;
-
     @OneToMany(() => CustomerAddress, (address) => address.customer, { cascade: true })
     addresses: CustomerAddress[];
 
