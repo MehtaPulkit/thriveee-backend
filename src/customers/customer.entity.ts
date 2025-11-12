@@ -20,14 +20,20 @@ export class Customer {
     @JoinColumn({ name: 'id' })
     profile: Profile;
 
-    @Column({ type: 'text', default: 'email' })
-    preferred_contact_method: 'email' | 'phone';
-
     @Column({ type: 'date', nullable: true })
     date_of_birth?: Date;
 
     @Column({ type: 'text', nullable: true })
     gender?: 'male' | 'female' | 'other';
+
+    @Column({ type: 'boolean', default: true })
+    email_notifications_enabled: boolean;
+
+    @Column({ type: 'boolean', default: false })
+    sms_notifications_enabled: boolean;
+
+    @Column({ type: 'boolean', default: false })
+    marketing_communications_enabled: boolean;
 
     @OneToMany(() => CustomerAddress, (address) => address.customer, { cascade: true })
     addresses: CustomerAddress[];
