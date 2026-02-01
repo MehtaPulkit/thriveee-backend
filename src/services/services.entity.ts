@@ -10,6 +10,8 @@ import {
 import { ServiceCategory } from 'src/service-categories/service-categories.entity';
 import { ServiceSubcategory } from 'src/service-subcategories/service-subcategories.entity';
 import { ProviderService } from 'src/provider-services/provider-service.entity';
+import { ServiceComponent } from 'src/service-components/service-component.entity';
+import { ServiceMultiplier } from 'src/service-multipliers/service-multiplier.entity';
 
 @Entity('services')
 export class Service {
@@ -48,6 +50,12 @@ export class Service {
     })
     @JoinColumn({ name: 'subcategory_id' })
     subcategory: ServiceSubcategory;
+
+    @OneToMany(() => ServiceComponent, (component) => component.service)
+    components: ServiceComponent[];
+
+    @OneToMany(() => ServiceMultiplier, (component) => component.service)
+    multipliers: ServiceMultiplier[];
 
     @OneToMany(() => ProviderService, (providerService) => providerService.service)
     providerServices: ProviderService[];

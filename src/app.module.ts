@@ -13,6 +13,9 @@ import { ServiceExplorerModule } from './service-explorer/service-explorer.modul
 import { SupabaseSyncModule } from './supabase-sync/supabase-sync.module';
 import { CustomersModule } from './customers/customers.module';
 import { CustomerAddressesModule } from './customer-addresses/customer-addresses.module';
+import { ServiceComponentsModule } from './service-components/service-components.module';
+import { ServiceComponentRatesModule } from './service-component-rates/service-component-rates.module';
+import { ServiceMultipliersModule } from './service-multipliers/service-multipliers.module';
 
 @Module({
   imports: [
@@ -40,6 +43,9 @@ import { CustomerAddressesModule } from './customer-addresses/customer-addresses
     SupabaseSyncModule,
     CustomersModule,
     CustomerAddressesModule,
+    ServiceComponentsModule,
+    ServiceComponentRatesModule,
+    ServiceMultipliersModule,
   ],
 })
 export class AppModule { }

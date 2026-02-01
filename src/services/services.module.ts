@@ -7,9 +7,10 @@ import { ServiceSubcategory } from 'src/service-subcategories/service-subcategor
 import { ServiceCategory } from 'src/service-categories/service-categories.entity';
 import { ServicesController } from './services.controller';
 import { ProviderService } from 'src/provider-services/provider-service.entity';
+import { ServiceComponent } from 'src/service-components/service-component.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Service, ServiceCategory, ServiceSubcategory, Suburb, ProviderService])],
+  imports: [TypeOrmModule.forFeature([Service, ServiceCategory, ServiceSubcategory, Suburb, ProviderService, ServiceComponent])],
   controllers: [ServicesController],
   providers: [ServicesService],
   exports: [ServicesService],
