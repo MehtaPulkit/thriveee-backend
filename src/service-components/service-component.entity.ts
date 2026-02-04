@@ -12,10 +12,10 @@ export class ServiceComponent {
 
     @Column()
     type: string;
-    
+
     @Column()
     label: string;
-    
+
     @Column({ nullable: true })
     description: string;
 
@@ -23,12 +23,15 @@ export class ServiceComponent {
     is_active: boolean;
 
     @Column()
+    code: string;
+
+    @Column()
     service_id: string;
 
     @ManyToOne(() => Service, (service) => service.components, {
         onDelete: 'CASCADE',
-    }) 
-    
+    })
+
     @JoinColumn({ name: 'service_id' })
     service: Service;
 

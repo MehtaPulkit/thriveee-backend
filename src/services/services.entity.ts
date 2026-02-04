@@ -30,6 +30,9 @@ export class Service {
     @Column({ type: 'text', default: 'flat' })
     pricing_strategy: string;
 
+    @Column({ type: 'text', default: 'v1' })
+    pricing_version: string;
+
     @Column({ type: 'boolean', default: false })
     is_inspection_required: boolean;
 

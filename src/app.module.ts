@@ -16,6 +16,7 @@ import { CustomerAddressesModule } from './customer-addresses/customer-addresses
 import { ServiceComponentsModule } from './service-components/service-components.module';
 import { ServiceComponentRatesModule } from './service-component-rates/service-component-rates.module';
 import { ServiceMultipliersModule } from './service-multipliers/service-multipliers.module';
+import { PricingModule } from './pricing/pricing.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { ServiceMultipliersModule } from './service-multipliers/service-multipli
     ServiceComponentsModule,
     ServiceComponentRatesModule,
     ServiceMultipliersModule,
+    PricingModule,
   ],
 })
 export class AppModule { }
