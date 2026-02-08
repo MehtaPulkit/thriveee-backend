@@ -31,6 +31,9 @@ export class PricingService {
         const components = await this.componentRepo.find({
             where: { service: { id: serviceId }, is_active: true },
             relations: ["rates"],
+            order: {
+                rates: { created_at: "DESC" }
+            }
         });
 
         const multipliers = await this.multiplierRepo.find({
