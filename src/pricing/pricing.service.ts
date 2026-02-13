@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ServiceComponentRate } from 'src/service-component-rates/service-component-rate.entity';
 import { ServiceComponent } from 'src/service-components/service-component.entity';
 import { ServiceMultiplier } from 'src/service-multipliers/service-multiplier.entity';
 import { Service } from 'src/services/services.entity';
@@ -15,9 +14,6 @@ export class PricingService {
 
         @InjectRepository(ServiceComponent)
         private componentRepo: Repository<ServiceComponent>,
-
-        @InjectRepository(ServiceComponentRate)
-        private rateRepo: Repository<ServiceComponentRate>,
 
         @InjectRepository(ServiceMultiplier)
         private multiplierRepo: Repository<ServiceMultiplier>,

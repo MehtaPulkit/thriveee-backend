@@ -18,6 +18,6 @@ import { PricingService } from "./pricing.service";
     ],
     controllers: [PricingController],
     providers: [PricingService],
-    exports: [PricingService], // important!
+    exports: [PricingService],
 })
 export class PricingModule { }

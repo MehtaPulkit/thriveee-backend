@@ -1,12 +1,14 @@
 // src/main.ts
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import serverless from 'serverless-http';
+
+let server;
 
 async function bootstrap() {
-  // 1. Create the NestJS application instance
   const app = await NestFactory.create(AppModule, { bodyParser: true });
 
-  // 2. Apply CORS configuration
+  // ✅ keep your CORS exactly same
   app.enableCors({
     origin: [
       'http://localhost:5173',
@@ -17,10 +19,14 @@ async function bootstrap() {
     credentials: true,
   });
 
-  // 3. Define port and start listening
-  const port = process.env.PORT || 3000;
-  await app.listen(port);
-  console.log(`🚀 Server running on http://localhost:${port}`);
+  await app.init();
+
+  const expressApp = app.getHttpAdapter().getInstance();
+  return serverless(expressApp);
 }
 
-bootstrap();
+// ✅ THIS replaces app.listen()
+export default async function handler(req, res) {
+  server = server ?? (await bootstrap());
+  return server(req, res);
+}
