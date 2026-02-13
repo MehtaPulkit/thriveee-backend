@@ -1,4 +1,3 @@
-// src/main.ts
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import serverless from 'serverless-http';
@@ -8,7 +7,6 @@ let server;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bodyParser: true });
 
-  // ✅ keep your CORS exactly same
   app.enableCors({
     origin: [
       'http://localhost:5173',
@@ -25,7 +23,6 @@ async function bootstrap() {
   return serverless(expressApp);
 }
 
-// ✅ THIS replaces app.listen()
 export default async function handler(req, res) {
   server = server ?? (await bootstrap());
   return server(req, res);

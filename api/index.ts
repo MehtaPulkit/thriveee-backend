@@ -1,1 +1,1 @@
-export { default } from '../dist/main';
+export { default } from '../src/main';
