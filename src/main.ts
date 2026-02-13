@@ -4,7 +4,7 @@ import serverless from 'serverless-http';
 
 let server;
 
-async function bootstrap() {
+async function createApp() {
   const app = await NestFactory.create(AppModule, { bodyParser: true });
 
   app.enableCors({
@@ -18,12 +18,26 @@ async function bootstrap() {
   });
 
   await app.init();
-
-  const expressApp = app.getHttpAdapter().getInstance();
-  return serverless(expressApp);
+  return app;
 }
 
+//
+// ✅ LOCAL MODE (runs when you do npm run start)
+//
+if (process.env.VERCEL !== '1') {
+  async function bootstrap() {
+    const app = await createApp();
+    const port = process.env.PORT || 3000;
+    await app.listen(port);
+    console.log(`🚀 Local server running on http://localhost:${port}`);
+  }
+  bootstrap();
+}
+
+//
+// ✅ SERVERLESS MODE (runs on Vercel)
+//
 export default async function handler(req, res) {
-  server = server ?? (await bootstrap());
+  server = server ?? serverless((await createApp()).getHttpAdapter().getInstance());
   return server(req, res);
 }
