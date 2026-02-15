@@ -17,6 +17,9 @@ import { ServiceComponentsModule } from './service-components/service-components
 import { ServiceComponentRatesModule } from './service-component-rates/service-component-rates.module';
 import { ServiceMultipliersModule } from './service-multipliers/service-multipliers.module';
 import { PricingModule } from './pricing/pricing.module';
+import { BookingsModule } from './bookings/bookings.module';
+import { BookingItemsModule } from './booking-items/booking-items.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -48,6 +51,9 @@ import { PricingModule } from './pricing/pricing.module';
     ServiceComponentRatesModule,
     ServiceMultipliersModule,
     PricingModule,
+    BookingsModule,
+    BookingItemsModule,
+    OrdersModule,
   ],
 })
 export class AppModule { }
