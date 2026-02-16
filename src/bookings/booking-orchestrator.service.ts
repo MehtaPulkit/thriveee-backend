@@ -1,0 +1,83 @@
+import { Injectable } from '@nestjs/common';
+import { DataSource } from 'typeorm';
+import { Booking } from './bookings.entity';
+import { PricingService } from '../pricing/pricing.service';
+import { CheckoutDto } from './dto/checkout.dto';
+import { BookingItem } from 'src/booking-items/booking-item.entity';
+import { Order } from 'src/orders/order.entity';
+import { BookingStatus } from './booking-status.enum';
+import { OrderStatus } from 'src/orders/order-status.enum';
+
+@Injectable()
+export class BookingOrchestratorService {
+    constructor(
+        private readonly dataSource: DataSource,
+        private readonly pricingService: PricingService,
+    ) { }
+
+    async checkout(dto: CheckoutDto) {
+        return this.dataSource.transaction(async (manager) => {
+
+            // 1️⃣ Create Order FIRST
+            const order = manager.create(Order, {
+                customer_id: dto.customerId,
+                status: OrderStatus.DRAFT,
+                currency: 'AUD',
+                total_amount: 0, // temporary
+            });
+
+            await manager.save(order);
+
+            let orderTotal = 0;
+            const createdBookings: Booking[] = [];
+
+            // 2️⃣ Loop bookings
+            for (const bookingInput of dto.bookings) {
+
+                // Calculate price
+                const pricing = await this.pricingService.calculatePrice(
+                    bookingInput.serviceId,
+                    bookingInput.items,
+                );
+
+                // Create booking
+                const booking = manager.create(Booking, {
+                    service_id: bookingInput.serviceId,
+                    customer_id: dto.customerId,
+                    order_id: order.id,
+                    status: BookingStatus.DRAFT,
+                    scheduled_date: bookingInput.scheduledDate,
+                    final_price: pricing.total,
+                    price_breakdown: pricing,
+                });
+
+                await manager.save(booking);
+
+                // Create booking items
+                const bookingItems = bookingInput.items.map(item =>
+                    manager.create(BookingItem, {
+                        booking_id: booking.id,
+                        component_id: item.componentId,
+                        quantity: item.quantity,
+                    }),
+                );
+
+                await manager.save(bookingItems);
+
+                orderTotal += pricing.total;
+                createdBookings.push(booking);
+            }
+
+            // 3️⃣ Update order total
+            order.total_amount = orderTotal;
+            await manager.save(order);
+
+            return {
+                order,
+                bookings: createdBookings,
+            };
+        });
+    }
+
+
+}

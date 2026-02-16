@@ -1,4 +1,5 @@
 import {
+    BadRequestException,
     Injectable,
     NotFoundException,
 } from '@nestjs/common';
@@ -46,6 +47,9 @@ export class BookingsService {
     // UPDATE
     async update(id: string, updateBookingDto: UpdateBookingDto): Promise<Booking> {
         const booking = await this.findOne(id);
+        if (updateBookingDto.status) {
+            this.validateStatusTransition(booking.status, updateBookingDto.status);
+        }
 
         Object.assign(booking, updateBookingDto);
 
@@ -60,4 +64,25 @@ export class BookingsService {
 
         return { message: 'Booking deleted successfully' };
     }
+
+    private validTransitions = {
+        draft: ['pending_confirmation'],
+        pending_confirmation: ['confirmed', 'cancelled'],
+        confirmed: ['in_progress', 'cancelled'],
+        in_progress: ['completed'],
+        completed: [],
+        cancelled: [],
+    };
+
+    private validateStatusTransition(
+        current: string,
+        next: string,
+    ) {
+        if (!this.validTransitions[current]?.includes(next)) {
+            throw new BadRequestException(
+                `Invalid booking status transition from ${current} to ${next}`,
+            );
+        }
+    }
+
 }

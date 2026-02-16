@@ -11,10 +11,12 @@ import { BookingsService } from './bookings.service';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateBookingDto } from './dto/update-booking.dto';
 import { Booking } from './bookings.entity';
+import { CheckoutDto } from './dto/checkout.dto';
+import { BookingOrchestratorService } from './booking-orchestrator.service';
 
 @Controller('bookings')
 export class BookingsController {
-    constructor(private readonly bookingsService: BookingsService) { }
+    constructor(private readonly bookingsService: BookingsService, private readonly bookingOrchestratorService: BookingOrchestratorService,) { }
 
     // CREATE
     @Post()
@@ -48,4 +50,11 @@ export class BookingsController {
     remove(@Param('id') id: string): Promise<{ message: string }> {
         return this.bookingsService.remove(id);
     }
+
+    @Post('checkout')
+    async checkout(@Body() dto: CheckoutDto) {
+        return this.bookingOrchestratorService.checkout(dto);
+    }
+
+
 }
