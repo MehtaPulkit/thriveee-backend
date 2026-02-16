@@ -7,7 +7,7 @@ import {
     UpdateDateColumn,
 } from 'typeorm';
 import { Provider } from '../providers/provider.entity';
-import { Customer } from 'src/customers/customer.entity';
+import { Customer } from '../customers/customer.entity';
 
 @Entity('profiles')
 export class Profile {

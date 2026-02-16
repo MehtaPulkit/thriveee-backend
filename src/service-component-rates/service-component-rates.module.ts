@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ServiceComponentRatesService } from './service-component-rates.service';
 import { ServiceComponentRatesController } from './service-component-rates.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ServiceComponent } from 'src/service-components/service-component.entity';
+import { ServiceComponent } from '../service-components/service-component.entity';
 import { ServiceComponentRate } from './service-component-rate.entity';
 
 @Module({

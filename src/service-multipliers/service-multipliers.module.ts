@@ -3,7 +3,7 @@ import { ServiceMultipliersController } from './service-multipliers.controller';
 import { ServiceMultipliersService } from './service-multipliers.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServiceMultiplier } from './service-multiplier.entity';
-import { Service } from 'src/services/services.entity';
+import { Service } from '../services/services.entity';
 
 
 @Module({

@@ -5,7 +5,7 @@ import { Customer } from './customer.entity';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { DataSource } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
-import { Profile } from 'src/profiles/profile.entity';
+import { Profile } from '../profiles/profile.entity';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 
 @Injectable()

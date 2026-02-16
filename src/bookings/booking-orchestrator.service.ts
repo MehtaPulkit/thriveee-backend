@@ -3,10 +3,10 @@ import { DataSource } from 'typeorm';
 import { Booking } from './bookings.entity';
 import { PricingService } from '../pricing/pricing.service';
 import { CheckoutDto } from './dto/checkout.dto';
-import { BookingItem } from 'src/booking-items/booking-item.entity';
-import { Order } from 'src/orders/order.entity';
+import { BookingItem } from '../booking-items/booking-item.entity';
+import { Order } from '../orders/order.entity';
 import { BookingStatus } from './booking-status.enum';
-import { OrderStatus } from 'src/orders/order-status.enum';
+import { OrderStatus } from '../orders/order-status.enum';
 
 @Injectable()
 export class BookingOrchestratorService {

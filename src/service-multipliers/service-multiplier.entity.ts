@@ -1,4 +1,4 @@
-import { Service } from 'src/services/services.entity';
+import { Service } from '../services/services.entity';
 import {
     Entity,
     PrimaryGeneratedColumn,

@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ServiceMultiplier } from './service-multiplier.entity';
-import { Service } from 'src/services/services.entity';
+import { Service } from '../services/services.entity';
 import { CreateServiceMultiplierDto } from './dto/create-service-mutliplier.dto';
 import { UpdateServiceMultiplierDto } from './dto/update-service-multiplier.dto';
 

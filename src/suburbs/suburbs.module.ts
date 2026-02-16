@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SuburbsService } from './suburbs.service';
 import { SuburbsController } from './suburbs.controller';
 import { Suburb } from './suburb.entity';
-import { ProviderSuburb } from 'src/provider-suburbs/provider-suburb.entity';
+import { ProviderSuburb } from '../provider-suburbs/provider-suburb.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Suburb, ProviderSuburb])],

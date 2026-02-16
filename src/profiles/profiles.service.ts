@@ -5,8 +5,8 @@ import { Profile } from './profile.entity';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { v4 as uuidv4 } from 'uuid';
-import { Customer } from 'src/customers/customer.entity';
-import { Provider } from 'src/providers/provider.entity';
+import { Customer } from '../customers/customer.entity';
+import { Provider } from '../providers/provider.entity';
 
 @Injectable()
 export class ProfilesService {

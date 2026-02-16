@@ -1,4 +1,4 @@
-import { ProviderSuburb } from 'src/provider-suburbs/provider-suburb.entity';
+import { ProviderSuburb } from '../provider-suburbs/provider-suburb.entity';
 import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany } from 'typeorm';
 
 @Entity('suburbs')

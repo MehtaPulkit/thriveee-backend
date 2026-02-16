@@ -6,8 +6,8 @@ import {
     JoinColumn,
     CreateDateColumn,
 } from 'typeorm';
-import { Provider } from 'src/providers/provider.entity';
-import { Suburb } from 'src/suburbs/suburb.entity';
+import { Provider } from '../providers/provider.entity';
+import { Suburb } from '../suburbs/suburb.entity';
 
 @Entity('provider_suburbs')
 export class ProviderSuburb {

@@ -1,5 +1,5 @@
-import { Booking } from 'src/bookings/bookings.entity';
-import { ServiceComponent } from 'src/service-components/service-component.entity';
+import { Booking } from '../bookings/bookings.entity';
+import { ServiceComponent } from '../service-components/service-component.entity';
 import {
     Entity,
     PrimaryGeneratedColumn,

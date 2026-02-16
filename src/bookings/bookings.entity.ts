@@ -8,9 +8,9 @@ import {
     CreateDateColumn,
 } from 'typeorm';
 import { BookingStatus } from './booking-status.enum';
-import { Provider } from 'src/providers/provider.entity';
-import { Service } from 'src/services/services.entity';
-import { Order } from 'src/orders/order.entity';
+import { Provider } from '../providers/provider.entity';
+import { Service } from '../services/services.entity';
+import { Order } from '../orders/order.entity';
 
 @Entity('bookings')
 export class Booking {

@@ -1,5 +1,5 @@
-import { ServiceComponent } from "src/service-components/service-component.entity";
-import { ServiceMultiplier } from "src/service-multipliers/service-multiplier.entity";
+import { ServiceComponent } from "../service-components/service-component.entity";
+import { ServiceMultiplier } from "../service-multipliers/service-multiplier.entity";
 
 export const mapComponents = (components: ServiceComponent[]) => {
     return components.reduce<Record<string, any>>((acc, component) => {

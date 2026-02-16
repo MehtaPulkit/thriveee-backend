@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ServiceComponentRate } from './service-component-rate.entity';
 import { Repository } from 'typeorm';
 import { CreateServiceComponentRateDto } from './dto/create-service-component-rate.dto';
-import { ServiceComponent } from 'src/service-components/service-component.entity';
+import { ServiceComponent } from '../service-components/service-component.entity';
 import { UpdateServiceComponentRateDto } from './dto/update-service-component-rate.dto';
 
 @Injectable()

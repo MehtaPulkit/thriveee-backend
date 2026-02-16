@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ServiceComponent } from 'src/service-components/service-component.entity';
-import { ServiceMultiplier } from 'src/service-multipliers/service-multiplier.entity';
-import { Service } from 'src/services/services.entity';
+import { ServiceComponent } from '../service-components/service-component.entity';
+import { ServiceMultiplier } from '../service-multipliers/service-multiplier.entity';
+import { Service } from '../services/services.entity';
 import { Repository } from 'typeorm';
 import { mapComponents, mapMultipliers } from './pricing.mapper';
 

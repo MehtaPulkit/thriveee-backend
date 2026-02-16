@@ -1,4 +1,4 @@
-import { ServiceComponent } from 'src/service-components/service-component.entity';
+import { ServiceComponent } from '../service-components/service-component.entity';
 import {
     Entity,
     PrimaryGeneratedColumn,
@@ -14,7 +14,8 @@ export class ServiceComponentRate {
     id: string;
 
     @ManyToOne(() => ServiceComponent, (component) => component.rates, {
-    onDelete: 'CASCADE'})
+        onDelete: 'CASCADE'
+    })
     @JoinColumn({ name: 'component_id' })
     component: ServiceComponent;
 

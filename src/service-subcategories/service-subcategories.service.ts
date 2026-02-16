@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ServiceSubcategory } from './service-subcategories.entity';
-import { ServiceCategory } from 'src/service-categories/service-categories.entity';
+import { ServiceCategory } from '../service-categories/service-categories.entity';
 import { UpdateServiceSubcategoryDto } from './dto/update-service-subcategories.dto';
 import { CreateServiceSubcategoryDto } from './dto/create-service-subcategories.dto';
 

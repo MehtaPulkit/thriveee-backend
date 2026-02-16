@@ -7,11 +7,11 @@ import {
     JoinColumn,
     OneToMany,
 } from 'typeorm';
-import { ServiceCategory } from 'src/service-categories/service-categories.entity';
-import { ServiceSubcategory } from 'src/service-subcategories/service-subcategories.entity';
-import { ProviderService } from 'src/provider-services/provider-service.entity';
-import { ServiceComponent } from 'src/service-components/service-component.entity';
-import { ServiceMultiplier } from 'src/service-multipliers/service-multiplier.entity';
+import { ServiceCategory } from '../service-categories/service-categories.entity';
+import { ServiceSubcategory } from '../service-subcategories/service-subcategories.entity';
+import { ProviderService } from '../provider-services/provider-service.entity';
+import { ServiceComponent } from '../service-components/service-component.entity';
+import { ServiceMultiplier } from '../service-multipliers/service-multiplier.entity';
 
 @Entity('services')
 export class Service {

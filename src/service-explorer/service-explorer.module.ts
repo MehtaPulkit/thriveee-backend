@@ -4,10 +4,10 @@ import { ServiceExplorerService } from './service-explorer.service';
 import { ServiceExplorerController } from './service-explorer.controller';
 import { ProviderSuburb } from '../provider-suburbs/provider-suburb.entity';
 import { ProviderService } from '../provider-services/provider-service.entity';
-import { Service } from 'src/services/services.entity';
-import { ServiceCategory } from 'src/service-categories/service-categories.entity';
-import { ServiceSubcategory } from 'src/service-subcategories/service-subcategories.entity';
-import { Suburb } from 'src/suburbs/suburb.entity';
+import { Service } from '../services/services.entity';
+import { ServiceCategory } from '../service-categories/service-categories.entity';
+import { ServiceSubcategory } from '../service-subcategories/service-subcategories.entity';
+import { Suburb } from '../suburbs/suburb.entity';
 
 @Module({
   imports: [

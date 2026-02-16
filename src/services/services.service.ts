@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
-import { ServiceCategory } from 'src/service-categories/service-categories.entity';
-import { ServiceSubcategory } from 'src/service-subcategories/service-subcategories.entity';
+import { ServiceCategory } from '../service-categories/service-categories.entity';
+import { ServiceSubcategory } from '../service-subcategories/service-subcategories.entity';
 import { Service } from './services.entity';
 
 @Injectable()

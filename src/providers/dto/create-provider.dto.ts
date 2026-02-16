@@ -1,4 +1,3 @@
-// src/providers/dto/create-provider.dto.ts
 import { IsNotEmpty, IsOptional, IsString, IsEmail, IsNumber, IsUUID } from 'class-validator';
 
 export class CreateProviderDto {

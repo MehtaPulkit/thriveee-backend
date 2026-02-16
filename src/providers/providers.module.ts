@@ -3,8 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Provider } from './provider.entity';
 import { ProvidersService } from './providers.service';
 import { ProvidersController } from './providers.controller';
-import { Profile } from 'src/profiles/profile.entity';
-import { ProviderSuburb } from 'src/provider-suburbs/provider-suburb.entity';
+import { Profile } from '../profiles/profile.entity';
+import { ProviderSuburb } from '../provider-suburbs/provider-suburb.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Provider, Profile, ProviderSuburb])],

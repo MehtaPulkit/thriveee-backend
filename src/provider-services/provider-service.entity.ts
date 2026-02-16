@@ -1,5 +1,5 @@
-import { Provider } from 'src/providers/provider.entity';
-import { Service } from 'src/services/services.entity';
+import { Provider } from '../providers/provider.entity';
+import { Service } from '../services/services.entity';
 import {
     Entity,
     PrimaryGeneratedColumn,

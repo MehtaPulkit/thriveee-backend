@@ -1,11 +1,10 @@
-// src/providers/providers.service.ts
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 import { CreateProviderDto } from './dto/create-provider.dto';
 import { v4 as uuidv4 } from 'uuid';
 import { Provider } from './provider.entity';
-import { Profile } from 'src/profiles/profile.entity';
+import { Profile } from '../profiles/profile.entity';
 import { UpdateProviderDto } from './dto/update-provider.dto';
 
 @Injectable()

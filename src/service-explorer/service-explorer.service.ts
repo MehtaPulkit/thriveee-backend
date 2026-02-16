@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In } from 'typeorm';
 import { ProviderSuburb } from '../provider-suburbs/provider-suburb.entity';
 import { ProviderService } from '../provider-services/provider-service.entity';
-import { Service } from 'src/services/services.entity';
-import { Suburb } from 'src/suburbs/suburb.entity';
+import { Service } from '../services/services.entity';
+import { Suburb } from '../suburbs/suburb.entity';
 
 @Injectable()
 export class ServiceExplorerService {

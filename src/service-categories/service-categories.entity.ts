@@ -1,5 +1,5 @@
-import { ServiceSubcategory } from 'src/service-subcategories/service-subcategories.entity';
-import { Service } from 'src/services/services.entity';
+import { ServiceSubcategory } from '../service-subcategories/service-subcategories.entity';
+import { Service } from '../services/services.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, CreateDateColumn } from 'typeorm';
 
 @Entity('service_categories')

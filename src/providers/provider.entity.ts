@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { Profile } from '../profiles/profile.entity';
-import { ProviderSuburb } from 'src/provider-suburbs/provider-suburb.entity';
-import { ProviderService } from 'src/provider-services/provider-service.entity';
+import { ProviderSuburb } from '../provider-suburbs/provider-suburb.entity';
+import { ProviderService } from '../provider-services/provider-service.entity';
 
 @Entity('providers')
 export class Provider {

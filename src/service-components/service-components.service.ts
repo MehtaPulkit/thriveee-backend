@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateServiceComponentDto } from './dto/create-service-component.dto';
 import { UpdateServiceComponentDto } from './dto/update-service-component.dto';
 import { ServiceComponent } from './service-component.entity';
-import { Service } from 'src/services/services.entity';
+import { Service } from '../services/services.entity';
 
 @Injectable()
 export class ServiceComponentsService {

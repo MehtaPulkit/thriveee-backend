@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
-import { ServiceComponentRate } from 'src/service-component-rates/service-component-rate.entity';
-import { Service } from 'src/services/services.entity';
+import { ServiceComponentRate } from '../service-component-rates/service-component-rate.entity';
+import { Service } from '../services/services.entity';
 
 @Entity('service_components')
 export class ServiceComponent {
