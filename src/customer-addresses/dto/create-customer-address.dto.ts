@@ -18,7 +18,7 @@ export class CreateCustomerAddressDto {
 
     @IsString()
     @IsNotEmpty()
-    city: string;
+    suburb: string;
 
     @IsString()
     @IsNotEmpty()
