@@ -8,9 +8,11 @@ import { Provider } from '../providers/provider.entity';
 import { Order } from '../orders/order.entity';
 import { BookingOrchestratorService } from './booking-orchestrator.service';
 import { PricingModule } from '../pricing/pricing.module';
+import { Customer } from 'src/customers/customer.entity';
+import { CustomerAddress } from 'src/customer-addresses/customer-address.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Booking, Service, Provider, Order]), PricingModule],
+  imports: [TypeOrmModule.forFeature([Booking, Service, Provider, Order, Customer, CustomerAddress]), PricingModule],
   controllers: [BookingsController],
   providers: [BookingsService, BookingOrchestratorService],
   exports: [BookingsService, BookingOrchestratorService],
