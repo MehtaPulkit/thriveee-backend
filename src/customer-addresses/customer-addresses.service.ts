@@ -25,7 +25,7 @@ export class CustomerAddressesService {
         if (customerId) {
             return this.repo.find({ where: { customer_id: customerId }, order: { created_at: 'DESC' } });
         }
-        return this.repo.find();
+        return this.repo.find({ relations: ['customer'], order: { created_at: 'DESC' } });
     }
 
     findOne(id: string): Promise<CustomerAddress | null> {
