@@ -9,7 +9,7 @@ import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateBookingDto } from './dto/update-booking.dto';
 import { Booking } from './bookings.entity';
 import { CustomerAddress } from '../customer-addresses/customer-address.entity';
-import { Customer } from 'src/customers/customer.entity';
+import { Customer } from '../customers/customer.entity';
 
 @Injectable()
 export class BookingsService {
