@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import { Profile } from '../profiles/profile.entity';
 import { CustomerAddress } from '../customer-addresses/customer-address.entity';
-import { Order } from 'src/orders/order.entity';
+import { Order } from '../orders/order.entity';
 
 @Entity('customers')
 export class Customer {

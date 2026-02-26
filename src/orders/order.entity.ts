@@ -8,7 +8,7 @@ import {
     JoinColumn,
 } from 'typeorm';
 import { OrderStatus } from './order-status.enum';
-import { Customer } from 'src/customers/customer.entity';
+import { Customer } from '../customers/customer.entity';
 
 @Entity('orders')
 export class Order {
