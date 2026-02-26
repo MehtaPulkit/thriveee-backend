@@ -5,8 +5,21 @@ import {
     Column,
     ManyToOne,
     CreateDateColumn,
-    JoinColumn
+    JoinColumn,
+    ValueTransformer
 } from 'typeorm';
+
+// 1. Define the transformer
+export class ColumnNumericTransformer implements ValueTransformer {
+    // When saving to DB (Number -> String)
+    to(data: number | null): number | null {
+        return data;
+    }
+    // When fetching from DB (String -> Number)
+    from(data: string | null): number | null {
+        return data !== null ? parseFloat(data) : null;
+    }
+}
 
 @Entity('service_component_rates')
 export class ServiceComponentRate {
@@ -19,10 +32,19 @@ export class ServiceComponentRate {
     @JoinColumn({ name: 'component_id' })
     component: ServiceComponent;
 
-    @Column('numeric', { nullable: true })
+    // 2. Apply the transformer to your numeric columns
+    @Column({
+        type: 'numeric',
+        nullable: true,
+        transformer: new ColumnNumericTransformer()
+    })
     per_unit_price: number;
 
-    @Column('numeric', { nullable: true })
+    @Column({
+        type: 'numeric',
+        nullable: true,
+        transformer: new ColumnNumericTransformer()
+    })
     flat_price: number;
 
     @CreateDateColumn()

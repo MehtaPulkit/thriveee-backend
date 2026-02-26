@@ -16,6 +16,7 @@ export const mapComponents = (components: ServiceComponent[]) => {
             type: component.type,
             perUnit: rate?.per_unit_price ?? 0,
             flat: rate?.flat_price ?? 0,
+            isFlatRate: component.is_flat_rate,
         };
 
         return acc;

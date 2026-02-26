@@ -39,7 +39,6 @@ export class BookingOrchestratorService {
                     bookingInput.serviceId,
                     bookingInput.items,
                 );
-
                 // Create booking
                 const booking = manager.create(Booking, {
                     service_id: bookingInput.serviceId,
@@ -49,6 +48,8 @@ export class BookingOrchestratorService {
                     scheduled_date: bookingInput.scheduledDate,
                     final_price: pricing.total,
                     price_breakdown: pricing,
+                    time_slot: bookingInput.timeSlot,
+                    address_id: bookingInput.addressId,
                 });
 
                 await manager.save(booking);
@@ -59,6 +60,8 @@ export class BookingOrchestratorService {
                         booking_id: booking.id,
                         component_id: item.componentId,
                         quantity: item.quantity,
+                        price: item.price,
+                        total: item.totalPrice,
                     }),
                 );
 

@@ -4,13 +4,20 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
+    ManyToOne,
+    JoinColumn,
 } from 'typeorm';
 import { OrderStatus } from './order-status.enum';
+import { Customer } from 'src/customers/customer.entity';
 
 @Entity('orders')
 export class Order {
     @PrimaryGeneratedColumn('uuid')
     id: string;
+
+    @ManyToOne(() => Customer, (customer) => customer.orders, { onDelete: 'CASCADE' })
+    @JoinColumn({ name: 'customer_id' })
+    customer: Customer;
 
     @Column({ type: 'uuid' })
     customer_id: string;

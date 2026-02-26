@@ -22,6 +22,9 @@ export class ServiceComponent {
     @Column({ default: true })
     is_active: boolean;
 
+    @Column({ default: false })
+    is_flat_rate: boolean;
+
     @Column()
     code: string;
 

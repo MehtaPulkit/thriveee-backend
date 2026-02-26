@@ -1,4 +1,4 @@
-import { IsEnum, IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsBoolean, IsEnum, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class CreateServiceComponentDto {
     @IsUUID()
@@ -13,6 +13,19 @@ export class CreateServiceComponentDto {
     @IsEnum(['count', 'boolean'])
     type: 'count' | 'boolean';
 
+    @IsBoolean()
     @IsOptional()
     is_active?: boolean;
+
+    @IsBoolean()
+    is_flat_rate?: boolean;
+
+    @IsString()
+    name: string;
+
+    @IsString()
+    description: string;
+
+    @IsString()
+    code: string;
 }

@@ -25,6 +25,13 @@ export class CheckoutItemDto {
     @IsNumber()
     @Min(1)
     quantity: number;
+
+    @IsNumber()
+    price: number;
+
+    @IsNumber()
+    totalPrice: number;
+
 }
 
 

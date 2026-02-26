@@ -18,7 +18,7 @@ export class OrdersService {
     }
 
     async findAll() {
-        return this.repo.find({ order: { created_at: 'DESC' } });
+        return this.repo.find({ relations: ['customer'], order: { created_at: 'DESC' } });
     }
 
     async findOne(id: string) {

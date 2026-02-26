@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { Profile } from '../profiles/profile.entity';
 import { CustomerAddress } from '../customer-addresses/customer-address.entity';
+import { Order } from 'src/orders/order.entity';
 
 @Entity('customers')
 export class Customer {
@@ -37,7 +38,8 @@ export class Customer {
 
     @OneToMany(() => CustomerAddress, (address) => address.customer, { cascade: true })
     addresses: CustomerAddress[];
-
+    @OneToMany(() => Order, (order) => order.customer, { cascade: true })
+    orders: Order[];
     @CreateDateColumn({ type: 'timestamptz' })
     created_at: Date;
 

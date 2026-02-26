@@ -24,7 +24,7 @@ export class BookingItem {
     quantity: number;
 
     @Column({ type: 'numeric' })
-    unit_price: number;
+    price: number;
 
     @Column({ type: 'numeric' })
     total: number;

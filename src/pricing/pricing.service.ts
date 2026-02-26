@@ -57,7 +57,7 @@ export class PricingService {
             componentId?: string;
             multiplierId?: string;
             name: string;
-            unitPrice?: number;
+            price?: number;
             quantity?: number;
             total?: number;
             value?: number;
@@ -65,23 +65,20 @@ export class PricingService {
 
         // 🔹 1️⃣ Calculate component subtotal
         for (const item of items) {
-            const component = config.components.find(
-                (c) => c.id === item.componentId,
+            const component = Object.values(config.components).find(
+                (c: any) => c.id === item.componentId,
             );
-
             if (!component) {
                 throw new Error(`Invalid component: ${item.componentId}`);
             }
-
-            const lineTotal = component.rate * item.quantity;
-
+            const lineTotal = component.isFlatRate ? component.flat : component.perUnit * item.quantity;
             subtotal += lineTotal;
 
             breakdown.push({
                 type: 'component',
                 componentId: component.id,
                 name: component.name,
-                unitPrice: component.rate,
+                price: component.perUnit,
                 quantity: item.quantity,
                 total: lineTotal,
             });
@@ -90,7 +87,7 @@ export class PricingService {
         // 🔹 2️⃣ Apply multipliers
         let multiplierTotal = 0;
 
-        const multipliersToApply = config.multipliers.filter((m) =>
+        const multipliersToApply = Object.values(config.multipliers).filter((m) =>
             appliedMultiplierIds.includes(m.id),
         );
 

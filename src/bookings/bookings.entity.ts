@@ -11,6 +11,8 @@ import { BookingStatus } from './booking-status.enum';
 import { Provider } from '../providers/provider.entity';
 import { Service } from '../services/services.entity';
 import { Order } from '../orders/order.entity';
+import { Customer } from '../customers/customer.entity';
+import { CustomerAddress } from '../customer-addresses/customer-address.entity';
 
 @Entity('bookings')
 export class Booking {
@@ -71,4 +73,12 @@ export class Booking {
     @ManyToOne(() => Service, { nullable: true })
     @JoinColumn({ name: 'service_id' })
     service: Service;
+
+    @ManyToOne(() => Customer, { nullable: true })
+    @JoinColumn({ name: 'customer_id' })
+    customer: Customer;
+
+    @ManyToOne(() => CustomerAddress, { nullable: true })
+    @JoinColumn({ name: 'address_id' })
+    address: CustomerAddress;
 }
