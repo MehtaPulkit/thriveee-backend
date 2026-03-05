@@ -5,11 +5,11 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateBookingDto } from './dto/create-booking.dto';
-import { UpdateBookingDto } from './dto/update-booking.dto';
-import { Booking } from './bookings.entity';
 import { CustomerAddress } from '../customer-addresses/customer-address.entity';
 import { Customer } from '../customers/customer.entity';
+import { Booking } from './bookings.entity';
+import { CreateBookingDto } from './dto/create-booking.dto';
+import { UpdateBookingDto } from './dto/update-booking.dto';
 
 @Injectable()
 export class BookingsService {
@@ -176,7 +176,21 @@ export class BookingsService {
 
         return { message: 'Booking deleted successfully' };
     }
+    async findByReference(ref: string) {
+        let booking;
 
+        // Check if the input is a number (BKN-10005 -> 10005)
+        const numericId = parseInt(ref.replace(/\D/g, ''));
+
+        if (!isNaN(numericId)) {
+            booking = await this.bookingRepository.findOne({ where: { booking_number: numericId } });
+        } else {
+            booking = await this.bookingRepository.findOne({ where: { id: ref } });
+        }
+
+        if (!booking) throw new NotFoundException('Booking not found');
+        return booking;
+    }
     // ===============================
     // STATUS TRANSITIONS TODO: handle the correct flow of status changes and prevent invalid transitions
     // ===============================
