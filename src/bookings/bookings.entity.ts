@@ -14,14 +14,32 @@ import { Provider } from '../providers/provider.entity';
 import { Service } from '../services/services.entity';
 import { BookingStatus } from './booking-status.enum';
 
+// Import or define your Enums here
+export enum CleaningType {
+    STANDARD = 'standard_cleaning',
+    DEEP = 'deep_cleaning',
+    END_OF_LEASE = 'end_of_lease_cleaning',
+    SPRING = 'spring_cleaning',
+}
+
+export enum PropertyType {
+    HOUSE = 'house',
+    APARTMENT = 'apartment',
+    TOWNHOUSE = 'townhouse',
+    GRANNY_FLAT = 'granny-flat',
+}
+
+export enum PropertyCondition {
+    LIGHT = 'light',
+    MEDIUM = 'medium',
+    HEAVY = 'heavy',
+}
+
 @Entity('bookings')
 export class Booking {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    /**
-     * Internal sequential number for human-readable IDs
-     */
     @Column({
         type: 'integer',
         generated: 'increment',
@@ -87,6 +105,33 @@ export class Booking {
     })
     final_price: number;
 
+    // --- New Fields ---
+
+    @Column({
+        type: 'text', // Matches your DB 'text' type with CHECK constraint
+        nullable: true,
+    })
+    cleaning_type: CleaningType;
+
+    @Column({
+        type: 'text',
+        nullable: true,
+    })
+    property_type: PropertyType;
+
+    @Column({
+        type: 'integer',
+        nullable: true,
+        default: 1,
+    })
+    storeys: number;
+
+    @Column({
+        type: 'text',
+        nullable: true,
+    })
+    property_condition: PropertyCondition;
+
     // --- Relations ---
 
     @ManyToOne(() => Order, { nullable: true })
@@ -109,10 +154,6 @@ export class Booking {
     @JoinColumn({ name: 'address_id' })
     address: CustomerAddress;
 
-    /**
-     * Virtual Display ID
-     * Example: 1005 -> "BKN-001005"
-     */
     get display_id(): string {
         if (!this.booking_number) return '';
         return `BKN-${this.booking_number.toString().padStart(6, '0')}`;

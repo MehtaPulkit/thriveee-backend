@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource } from 'typeorm';
-import { Booking } from './bookings.entity';
-import { PricingService } from '../pricing/pricing.service';
-import { CheckoutDto } from './dto/checkout.dto';
 import { BookingItem } from '../booking-items/booking-item.entity';
-import { Order } from '../orders/order.entity';
-import { BookingStatus } from './booking-status.enum';
 import { OrderStatus } from '../orders/order-status.enum';
+import { Order } from '../orders/order.entity';
+import { PricingService } from '../pricing/pricing.service';
+import { BookingStatus } from './booking-status.enum';
+import { Booking } from './bookings.entity';
+import { CheckoutDto } from './dto/checkout.dto';
 
 @Injectable()
 export class BookingOrchestratorService {
@@ -49,7 +49,12 @@ export class BookingOrchestratorService {
                     final_price: pricing.total,
                     price_breakdown: pricing,
                     time_slot: bookingInput.timeSlot,
+                    notes: bookingInput.notes,
                     address_id: bookingInput.addressId,
+                    cleaning_type: bookingInput.cleaning_type,
+                    property_type: bookingInput.property_type,
+                    storeys: bookingInput.storeys,
+                    property_condition: bookingInput.property_condition,
                 });
 
                 await manager.save(booking);

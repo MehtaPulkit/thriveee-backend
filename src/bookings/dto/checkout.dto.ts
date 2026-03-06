@@ -1,17 +1,19 @@
 // dto/checkout.dto.ts
 
+import { Type } from 'class-transformer';
 import {
-    IsUUID,
     IsArray,
+    IsDateString,
+    IsEnum,
+    IsNotEmpty,
+    IsNumber,
     IsOptional,
     IsString,
-    IsDateString,
-    ValidateNested,
-    IsNumber,
+    IsUUID,
     Min,
-    IsNotEmpty,
+    ValidateNested,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { CleaningType, PropertyCondition, PropertyType } from './create-booking.dto';
 
 
 // =============================
@@ -72,6 +74,23 @@ export class CheckoutBookingDto {
     @IsArray()
     @IsOptional()
     multiplierIds?: string[];
+
+    @IsOptional()
+    @IsEnum(CleaningType)
+    cleaning_type?: CleaningType;
+
+    @IsOptional()
+    @IsEnum(PropertyType)
+    property_type?: PropertyType;
+
+    @IsOptional()
+    @IsNumber()
+    @Min(1)
+    storeys?: number;
+
+    @IsOptional()
+    @IsEnum(PropertyCondition)
+    property_condition?: PropertyCondition;
 }
 
 

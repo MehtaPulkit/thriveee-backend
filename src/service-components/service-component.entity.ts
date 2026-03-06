@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ServiceComponentRate } from '../service-component-rates/service-component-rate.entity';
 import { Service } from '../services/services.entity';
 
@@ -18,6 +18,9 @@ export class ServiceComponent {
 
     @Column({ nullable: true })
     description: string;
+
+    @Column({ nullable: true })
+    section: string;
 
     @Column({ default: true })
     is_active: boolean;

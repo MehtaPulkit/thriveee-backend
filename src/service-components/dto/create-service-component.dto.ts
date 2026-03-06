@@ -17,6 +17,10 @@ export class CreateServiceComponentDto {
     @IsOptional()
     is_active?: boolean;
 
+    @IsOptional()
+    @IsString()
+    section?: string;
+
     @IsBoolean()
     is_flat_rate?: boolean;
 
