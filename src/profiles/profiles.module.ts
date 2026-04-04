@@ -12,4 +12,4 @@ import { Provider } from '../providers/provider.entity';
   providers: [ProfilesService],
   exports: [ProfilesService],
 })
-export class ProfilesModule { }
+export class ProfilesModule {}

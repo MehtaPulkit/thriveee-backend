@@ -9,7 +9,9 @@ describe('ServiceExplorerController', () => {
       controllers: [ServiceExplorerController],
     }).compile();
 
-    controller = module.get<ServiceExplorerController>(ServiceExplorerController);
+    controller = module.get<ServiceExplorerController>(
+      ServiceExplorerController,
+    );
   });
 
   it('should be defined', () => {

@@ -13,9 +13,9 @@ async function bootstrap() {
   // 🔹 Global Validation Pipe
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,                 // strips unknown fields
-      forbidNonWhitelisted: true,      // throws error if unknown field exists
-      transform: true,                 // auto-transform payloads
+      whitelist: true, // strips unknown fields
+      forbidNonWhitelisted: true, // throws error if unknown field exists
+      transform: true, // auto-transform payloads
       transformOptions: {
         enableImplicitConversion: true,
       },
@@ -31,7 +31,6 @@ async function bootstrap() {
       : ['http://localhost:5173', 'http://localhost:5174'],
     credentials: true,
   });
-
 
   const port = process.env.PORT || 3000;
 

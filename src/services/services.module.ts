@@ -10,9 +10,18 @@ import { ProviderService } from '../provider-services/provider-service.entity';
 import { ServiceComponent } from '../service-components/service-component.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Service, ServiceCategory, ServiceSubcategory, Suburb, ProviderService, ServiceComponent])],
+  imports: [
+    TypeOrmModule.forFeature([
+      Service,
+      ServiceCategory,
+      ServiceSubcategory,
+      Suburb,
+      ProviderService,
+      ServiceComponent,
+    ]),
+  ],
   controllers: [ServicesController],
   providers: [ServicesService],
   exports: [ServicesService],
 })
-export class ServicesModule { }
+export class ServicesModule {}

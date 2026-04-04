@@ -5,13 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServiceMultiplier } from './service-multiplier.entity';
 import { Service } from '../services/services.entity';
 
-
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([ServiceMultiplier, Service]),
-  ],
+  imports: [TypeOrmModule.forFeature([ServiceMultiplier, Service])],
   controllers: [ServiceMultipliersController],
   providers: [ServiceMultipliersService],
   exports: [ServiceMultipliersService],
 })
-export class ServiceMultipliersModule { }
+export class ServiceMultipliersModule {}

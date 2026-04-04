@@ -9,6 +9,6 @@ import { ServiceComponentRate } from './service-component-rate.entity';
   imports: [TypeOrmModule.forFeature([ServiceComponentRate, ServiceComponent])],
   controllers: [ServiceComponentRatesController],
   providers: [ServiceComponentRatesService],
-  exports: [ServiceComponentRatesService]
+  exports: [ServiceComponentRatesService],
 })
-export class ServiceComponentRatesModule { }
+export class ServiceComponentRatesModule {}

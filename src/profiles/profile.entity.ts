@@ -1,52 +1,52 @@
 import {
-    Entity,
-    PrimaryColumn,
-    Column,
-    OneToOne,
-    CreateDateColumn,
-    UpdateDateColumn,
+  Entity,
+  PrimaryColumn,
+  Column,
+  OneToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Provider } from '../providers/provider.entity';
 import { Customer } from '../customers/customer.entity';
 
 @Entity('profiles')
 export class Profile {
-    // Note: Supabase auth.users already manages this UUID.
-    @PrimaryColumn('uuid')
-    id: string;
+  // Note: Supabase auth.users already manages this UUID.
+  @PrimaryColumn('uuid')
+  id: string;
 
-    @Column({ unique: true, nullable: true })
-    email?: string;
+  @Column({ unique: true, nullable: true })
+  email?: string;
 
-    @Column({ nullable: true })
-    phone_number?: string;
+  @Column({ nullable: true })
+  phone_number?: string;
 
-    @Column({
-        type: 'text',
-        default: 'customer',
-    })
-    role: 'customer' | 'provider' | 'admin' | 'superadmin' | 'staff';
+  @Column({
+    type: 'text',
+    default: 'customer',
+  })
+  role: 'customer' | 'provider' | 'admin' | 'superadmin' | 'staff';
 
-    @CreateDateColumn({ type: 'timestamptz' })
-    created_at: Date;
+  @CreateDateColumn({ type: 'timestamptz' })
+  created_at: Date;
 
-    @UpdateDateColumn({ type: 'timestamptz', nullable: true })
-    updated_at: Date;
+  @UpdateDateColumn({ type: 'timestamptz', nullable: true })
+  updated_at: Date;
 
-    @Column({ nullable: true })
-    address?: string;
+  @Column({ nullable: true })
+  address?: string;
 
-    @Column({ nullable: true })
-    first_name?: string;
+  @Column({ nullable: true })
+  first_name?: string;
 
-    @Column({ nullable: true })
-    last_name?: string;
+  @Column({ nullable: true })
+  last_name?: string;
 
-    @Column({ nullable: false, default: false })
-    isActive?: boolean;
+  @Column({ nullable: false, default: false })
+  isActive?: boolean;
 
-    @OneToOne(() => Provider, (provider) => provider.profile)
-    provider?: Provider;
-    @OneToOne(() => Customer, (customer) => customer.profile)
-    customer?: Customer;
+  @OneToOne(() => Provider, (provider) => provider.profile)
+  provider?: Provider;
+  @OneToOne(() => Customer, (customer) => customer.profile)
+  customer?: Customer;
 }

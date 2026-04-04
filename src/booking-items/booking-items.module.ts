@@ -12,4 +12,4 @@ import { ServiceComponent } from '../service-components/service-component.entity
   providers: [BookingItemsService],
   exports: [BookingItemsService],
 })
-export class BookingItemsModule { }
+export class BookingItemsModule {}

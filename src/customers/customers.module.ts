@@ -11,4 +11,4 @@ import { Profile } from '../profiles/profile.entity';
   providers: [CustomersService],
   exports: [CustomersService],
 })
-export class CustomersModule { }
+export class CustomersModule {}

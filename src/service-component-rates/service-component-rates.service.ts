@@ -8,48 +8,47 @@ import { UpdateServiceComponentRateDto } from './dto/update-service-component-ra
 
 @Injectable()
 export class ServiceComponentRatesService {
-    constructor(
-        @InjectRepository(ServiceComponentRate)
-        private ratesRepo: Repository<ServiceComponentRate>,
-        @InjectRepository(ServiceComponent)
-        private componentsRepo: Repository<ServiceComponent>,
+  constructor(
+    @InjectRepository(ServiceComponentRate)
+    private ratesRepo: Repository<ServiceComponentRate>,
+    @InjectRepository(ServiceComponent)
+    private componentsRepo: Repository<ServiceComponent>,
+  ) {}
+  async createRate(dto: CreateServiceComponentRateDto) {
+    const component = await this.componentsRepo.findOne({
+      where: { id: dto.component_id },
+    });
 
-    ) { }
-    async createRate(dto: CreateServiceComponentRateDto) {
-        const component = await this.componentsRepo.findOne({
-            where: { id: dto.component_id },
-        });
+    if (!component) throw new NotFoundException('Component not found');
 
-        if (!component) throw new NotFoundException('Component not found');
+    const rate = this.ratesRepo.create({
+      ...dto,
+      component,
+    });
 
-        const rate = this.ratesRepo.create({
-            ...dto,
-            component,
-        });
+    return this.ratesRepo.save(rate);
+  }
 
-        return this.ratesRepo.save(rate);
-    }
+  findAllRates() {
+    return this.ratesRepo.find({
+      relations: ['component'],
+    });
+  }
 
-    findAllRates() {
-        return this.ratesRepo.find({
-            relations: ['component'],
-        });
-    }
+  async findOneRate(id: string) {
+    const comp = await this.ratesRepo.findOne({
+      where: { id },
+    });
 
-    async findOneRate(id: string) {
-        const comp = await this.ratesRepo.findOne({
-            where: { id },
-        });
+    if (!comp) throw new NotFoundException('Component Rate not found');
+    return comp;
+  }
 
-        if (!comp) throw new NotFoundException('Component Rate not found');
-        return comp;
-    }
+  updateRate(id: string, dto: UpdateServiceComponentRateDto) {
+    return this.ratesRepo.update(id, dto);
+  }
 
-    updateRate(id: string, dto: UpdateServiceComponentRateDto) {
-        return this.ratesRepo.update(id, dto);
-    }
-
-    deleteRate(id: string) {
-        return this.ratesRepo.delete(id);
-    }
+  deleteRate(id: string) {
+    return this.ratesRepo.delete(id);
+  }
 }

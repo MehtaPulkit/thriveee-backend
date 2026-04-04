@@ -17,10 +17,10 @@ import { Suburb } from '../suburbs/suburb.entity';
       Service,
       ServiceCategory,
       ServiceSubcategory,
-      Suburb
+      Suburb,
     ]),
   ],
   controllers: [ServiceExplorerController],
   providers: [ServiceExplorerService],
 })
-export class ServiceExplorerModule { }
+export class ServiceExplorerModule {}

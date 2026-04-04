@@ -1,34 +1,43 @@
-import { Controller, Get, Post, Delete, Body, Param, Query, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Body,
+  Param,
+  Query,
+  Put,
+} from '@nestjs/common';
 import { ProviderSuburbsService } from './provider-suburbs.service';
 import { CreateProviderSuburbDto } from './dto/create-provider-suburb.dto';
 import { UpdateProviderSuburbDto } from './dto/update-provider-suburb.dto';
 
 @Controller('provider-suburbs')
 export class ProviderSuburbsController {
-    constructor(private readonly service: ProviderSuburbsService) { }
+  constructor(private readonly service: ProviderSuburbsService) {}
 
-    @Post()
-    create(@Body() dto: CreateProviderSuburbDto) {
-        return this.service.create(dto);
-    }
+  @Post()
+  create(@Body() dto: CreateProviderSuburbDto) {
+    return this.service.create(dto);
+  }
 
-    @Get()
-    findAll() {
-        return this.service.findAll();
-    }
+  @Get()
+  findAll() {
+    return this.service.findAll();
+  }
 
-    @Get()
-    findOne(@Query('provider_id') providerId: string) {
-        return this.service.findByProvider(providerId);
-    }
+  @Get()
+  findOne(@Query('provider_id') providerId: string) {
+    return this.service.findByProvider(providerId);
+  }
 
-    @Put(':id')
-    update(@Param('id') id: string, @Body() dto: UpdateProviderSuburbDto) {
-        return this.service.update(id, dto);
-    }
+  @Put(':id')
+  update(@Param('id') id: string, @Body() dto: UpdateProviderSuburbDto) {
+    return this.service.update(id, dto);
+  }
 
-    @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.service.remove(id);
-    }
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.service.remove(id);
+  }
 }

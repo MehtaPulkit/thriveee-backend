@@ -1,25 +1,32 @@
-import { IsBoolean, IsNotEmpty, IsOptional, IsString, IsUUID, IsInt } from 'class-validator';
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUUID,
+  IsInt,
+} from 'class-validator';
 
 export class CreateServiceMultiplierDto {
-    @IsUUID()
-    service_id: string;
+  @IsUUID()
+  service_id: string;
 
-    @IsString()
-    @IsNotEmpty()
-    name: string;
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 
-    @IsString()
-    @IsNotEmpty()
-    code: string;
+  @IsString()
+  @IsNotEmpty()
+  code: string;
 
-    @IsInt()
-    value: number;
+  @IsInt()
+  value: number;
 
-    @IsString()
-    @IsOptional()
-    description?: string;
+  @IsString()
+  @IsOptional()
+  description?: string;
 
-    @IsBoolean()
-    @IsOptional()
-    is_active?: boolean;
+  @IsBoolean()
+  @IsOptional()
+  is_active?: boolean;
 }

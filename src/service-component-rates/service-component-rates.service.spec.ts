@@ -9,7 +9,9 @@ describe('ServiceComponentRatesService', () => {
       providers: [ServiceComponentRatesService],
     }).compile();
 
-    service = module.get<ServiceComponentRatesService>(ServiceComponentRatesService);
+    service = module.get<ServiceComponentRatesService>(
+      ServiceComponentRatesService,
+    );
   });
 
   it('should be defined', () => {

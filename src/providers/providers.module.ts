@@ -12,4 +12,4 @@ import { ProviderSuburb } from '../provider-suburbs/provider-suburb.entity';
   providers: [ProvidersService],
   exports: [ProvidersService],
 })
-export class ProvidersModule { }
+export class ProvidersModule {}

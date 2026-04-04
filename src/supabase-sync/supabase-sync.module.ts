@@ -6,4 +6,4 @@ import { SupabaseSyncService } from './supabase-sync.service';
   controllers: [SupabaseSyncController],
   providers: [SupabaseSyncService],
 })
-export class SupabaseSyncModule { }
+export class SupabaseSyncModule {}

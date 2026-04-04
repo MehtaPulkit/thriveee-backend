@@ -1,11 +1,11 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    ManyToOne,
-    CreateDateColumn,
-    JoinColumn,
-    OneToMany,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  CreateDateColumn,
+  JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { ServiceCategory } from '../service-categories/service-categories.entity';
 import { ServiceSubcategory } from '../service-subcategories/service-subcategories.entity';
@@ -15,51 +15,54 @@ import { ServiceMultiplier } from '../service-multipliers/service-multiplier.ent
 
 @Entity('services')
 export class Service {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column({ type: 'text', unique: true })
-    name: string;
+  @Column({ type: 'text', unique: true })
+  name: string;
 
-    @Column({ type: 'text', nullable: true })
-    description?: string;
+  @Column({ type: 'text', nullable: true })
+  description?: string;
 
-    @Column({ type: 'numeric', nullable: true })
-    base_price?: number;
+  @Column({ type: 'numeric', nullable: true })
+  base_price?: number;
 
-    @Column({ type: 'text', default: 'flat' })
-    pricing_strategy: string;
+  @Column({ type: 'text', default: 'flat' })
+  pricing_strategy: string;
 
-    @Column({ type: 'text', default: 'v1' })
-    pricing_version: string;
+  @Column({ type: 'text', default: 'v1' })
+  pricing_version: string;
 
-    @Column({ type: 'boolean', default: false })
-    is_inspection_required: boolean;
+  @Column({ type: 'boolean', default: false })
+  is_inspection_required: boolean;
 
-    @Column({ type: 'boolean', default: true })
-    is_active: boolean;
+  @Column({ type: 'boolean', default: true })
+  is_active: boolean;
 
-    @CreateDateColumn({ type: 'timestamptz' })
-    created_at: Date;
+  @CreateDateColumn({ type: 'timestamptz' })
+  created_at: Date;
 
-    @ManyToOne(() => ServiceCategory, (category) => category.services, {
-        onDelete: 'SET NULL',
-    })
-    @JoinColumn({ name: 'category_id' })
-    category: ServiceCategory;
+  @ManyToOne(() => ServiceCategory, (category) => category.services, {
+    onDelete: 'SET NULL',
+  })
+  @JoinColumn({ name: 'category_id' })
+  category: ServiceCategory;
 
-    @ManyToOne(() => ServiceSubcategory, (subcategory) => subcategory.services, {
-        onDelete: 'SET NULL',
-    })
-    @JoinColumn({ name: 'subcategory_id' })
-    subcategory: ServiceSubcategory;
+  @ManyToOne(() => ServiceSubcategory, (subcategory) => subcategory.services, {
+    onDelete: 'SET NULL',
+  })
+  @JoinColumn({ name: 'subcategory_id' })
+  subcategory: ServiceSubcategory;
 
-    @OneToMany(() => ServiceComponent, (component) => component.service)
-    components: ServiceComponent[];
+  @OneToMany(() => ServiceComponent, (component) => component.service)
+  components: ServiceComponent[];
 
-    @OneToMany(() => ServiceMultiplier, (component) => component.service)
-    multipliers: ServiceMultiplier[];
+  @OneToMany(() => ServiceMultiplier, (component) => component.service)
+  multipliers: ServiceMultiplier[];
 
-    @OneToMany(() => ProviderService, (providerService) => providerService.service)
-    providerServices: ProviderService[];
+  @OneToMany(
+    () => ProviderService,
+    (providerService) => providerService.service,
+  )
+  providerServices: ProviderService[];
 }

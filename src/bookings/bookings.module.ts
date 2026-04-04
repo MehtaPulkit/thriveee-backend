@@ -12,9 +12,19 @@ import { Customer } from '../customers/customer.entity';
 import { CustomerAddress } from '../customer-addresses/customer-address.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Booking, Service, Provider, Order, Customer, CustomerAddress]), PricingModule],
+  imports: [
+    TypeOrmModule.forFeature([
+      Booking,
+      Service,
+      Provider,
+      Order,
+      Customer,
+      CustomerAddress,
+    ]),
+    PricingModule,
+  ],
   controllers: [BookingsController],
   providers: [BookingsService, BookingOrchestratorService],
   exports: [BookingsService, BookingOrchestratorService],
 })
-export class BookingsModule { }
+export class BookingsModule {}

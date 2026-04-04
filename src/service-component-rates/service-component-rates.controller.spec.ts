@@ -9,7 +9,9 @@ describe('ServiceComponentRatesController', () => {
       controllers: [ServiceComponentRatesController],
     }).compile();
 
-    controller = module.get<ServiceComponentRatesController>(ServiceComponentRatesController);
+    controller = module.get<ServiceComponentRatesController>(
+      ServiceComponentRatesController,
+    );
   });
 
   it('should be defined', () => {

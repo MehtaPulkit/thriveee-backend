@@ -1,52 +1,60 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { ServiceComponentRate } from '../service-component-rates/service-component-rate.entity';
 import { Service } from '../services/services.entity';
 
 @Entity('service_components')
 export class ServiceComponent {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @Column()
-    type: string;
+  @Column()
+  type: string;
 
-    @Column()
-    label: string;
+  @Column()
+  label: string;
 
-    @Column({ nullable: true })
-    description: string;
+  @Column()
+  display_order: number;
 
-    @Column({ nullable: true })
-    section: string;
+  @Column({ nullable: true })
+  description: string;
 
-    @Column({ default: true })
-    is_active: boolean;
+  @Column({ nullable: true })
+  section: string;
 
-    @Column({ default: false })
-    is_flat_rate: boolean;
+  @Column({ default: true })
+  is_active: boolean;
 
-    @Column()
-    code: string;
+  @Column({ default: false })
+  is_flat_rate: boolean;
 
-    @Column()
-    service_id: string;
+  @Column()
+  code: string;
 
-    @ManyToOne(() => Service, (service) => service.components, {
-        onDelete: 'CASCADE',
-    })
+  @Column()
+  service_id: string;
 
-    @JoinColumn({ name: 'service_id' })
-    service: Service;
+  @ManyToOne(() => Service, (service) => service.components, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'service_id' })
+  service: Service;
 
-    @OneToMany(() => ServiceComponentRate, (rate) => rate.component, {
-        cascade: true,
-    })
-    rates: ServiceComponentRate[];
+  @OneToMany(() => ServiceComponentRate, (rate) => rate.component, {
+    cascade: true,
+  })
+  rates: ServiceComponentRate[];
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    created_at: Date;
-
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  created_at: Date;
 }

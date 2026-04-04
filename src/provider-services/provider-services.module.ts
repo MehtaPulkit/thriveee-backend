@@ -5,9 +5,9 @@ import { ProviderServicesController } from './provider-services.controller';
 import { ProviderService } from './provider-service.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([ProviderService])],
-    controllers: [ProviderServicesController],
-    providers: [ProviderServicesService],
-    exports: [ProviderServicesService],
+  imports: [TypeOrmModule.forFeature([ProviderService])],
+  controllers: [ProviderServicesController],
+  providers: [ProviderServicesService],
+  exports: [ProviderServicesService],
 })
-export class ProviderServicesModule { }
+export class ProviderServicesModule {}
