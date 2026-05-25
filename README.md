@@ -1,98 +1,182 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Thriveee Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Backend API for Thriveee, built with NestJS, TypeScript, TypeORM, PostgreSQL, and Supabase. The service manages the core marketplace data model for suburbs, services, providers, customers, pricing, bookings, orders, and Supabase Auth profile sync.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Tech Stack
 
-## Description
+- NestJS 11
+- TypeScript
+- PostgreSQL with TypeORM
+- Supabase Auth integration
+- Jest for unit and e2e tests
+- ESLint and Prettier for code quality
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Requirements
 
-## Project setup
+- Node.js 22 or newer
+- npm
+- PostgreSQL database URL, currently expected to point at Supabase/Postgres
+- Supabase project URL and service role key for auth sync
+
+## Getting Started
+
+Install dependencies:
 
 ```bash
-$ npm install
+npm install
 ```
 
-## Compile and run the project
+Create a local environment file:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+cp .env.local .env
 ```
 
-## Run tests
+Update `.env` with your local or Supabase values:
+
+```env
+DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_ROLE=your-service-role-key
+PORT=3000
+NODE_ENV=development
+```
+
+Start the API in watch mode:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start:dev
 ```
 
-## Deployment
+The API runs at:
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+```text
+http://localhost:3000/api
+```
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## Available Scripts
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm run start       # Start the Nest application
+npm run start:dev   # Start in watch mode
+npm run start:debug # Start in debug watch mode
+npm run build       # Compile TypeScript into dist/
+npm run start:prod  # Run the compiled production build
+npm run lint        # Run ESLint with auto-fix
+npm run format      # Format source and test files
+npm run test        # Run unit tests
+npm run test:watch  # Run unit tests in watch mode
+npm run test:cov    # Run tests with coverage
+npm run test:e2e    # Run e2e tests
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## Project Structure
 
-## Resources
+```text
+src/
+  app.module.ts                  # Root module and database configuration
+  main.ts                        # API bootstrap, /api prefix, CORS, validation
+  suburbs/                       # Suburb catalog and search
+  service-categories/            # Top-level service categories
+  service-subcategories/         # Nested service categories
+  services/                      # Sellable services
+  service-components/            # Pricing components for services
+  service-component-rates/       # Component rate records
+  service-multipliers/           # Pricing multipliers
+  pricing/                       # Pricing configuration and calculation
+  providers/                     # Provider profiles
+  provider-services/             # Provider-to-service mappings
+  provider-suburbs/              # Provider service areas
+  customers/                     # Customer records
+  customer-addresses/            # Customer address records
+  bookings/                      # Booking lifecycle and checkout orchestration
+  booking-items/                 # Items attached to bookings
+  orders/                        # Order lifecycle
+  profiles/                      # User profile records
+  supabase-sync/                 # Supabase Auth webhook handling
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+## API Overview
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+All routes are prefixed with `/api`.
 
-## Support
+| Area | Endpoints |
+| --- | --- |
+| Health/root | `GET /api` |
+| Suburbs | `GET /api/suburbs`, `GET /api/suburbs/search?q=`, `GET /api/suburbs/:id` |
+| Service catalog | CRUD routes for `/api/service-categories`, `/api/service-subcategories`, and `/api/services` |
+| Service configuration | CRUD routes for `/api/service-components`, `/api/service-component-rates`, and `/api/service-multipliers` |
+| Pricing | `GET /api/pricing/services/:serviceId/config`, `POST /api/pricing/calculate` |
+| Providers | CRUD routes for `/api/providers`, `/api/provider-services`, and `/api/provider-suburbs` |
+| Service explorer | `GET /api/service-explorer/suburb/:suburbId`, `GET /api/service-explorer/suburb-name/:suburbName` |
+| Customers | CRUD routes for `/api/customers` and `/api/customer-addresses` |
+| Bookings | CRUD routes for `/api/bookings`, plus `POST /api/bookings/checkout` |
+| Booking items | CRUD routes for `/api/booking-items` |
+| Orders | CRUD routes for `/api/orders` |
+| Profiles | CRUD routes for `/api/profiles` |
+| Supabase sync | `POST /api/supabase-hooks` |
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Environment Notes
 
-## Stay in touch
+- `DATABASE_URL` is required by TypeORM.
+- `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE` are required by the Supabase sync service.
+- `PORT` defaults to `3000` when not set.
+- CORS allows `https://www.thriveee.com.au` in production.
+- CORS allows `http://localhost:5173` and `http://localhost:5174` outside production.
+- TypeORM entity auto-loading is enabled, but schema synchronization is disabled.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Validation
 
-## License
+The app uses a global Nest `ValidationPipe` with:
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- unknown request fields stripped
+- non-whitelisted fields rejected
+- implicit DTO type conversion enabled
+
+Keep DTOs up to date when changing request payloads, because incoming data is validated globally before it reaches controllers.
+
+## Supabase Webhook
+
+Supabase Auth events should be sent to:
+
+```text
+POST /api/supabase-hooks
+```
+
+The controller accepts the `x-supabase-signature` header, but signature verification is not implemented yet. Treat that as a security follow-up before relying on the webhook in production.
+
+## Testing
+
+Run the unit test suite:
+
+```bash
+npm run test
+```
+
+Run e2e tests:
+
+```bash
+npm run test:e2e
+```
+
+Generate coverage:
+
+```bash
+npm run test:cov
+```
+
+## Build and Production
+
+Compile the application:
+
+```bash
+npm run build
+```
+
+Run the compiled output:
+
+```bash
+npm run start:prod
+```
+
+Before deploying, make sure production environment variables are configured, database SSL requirements match the target database, and Supabase webhook security is reviewed.
