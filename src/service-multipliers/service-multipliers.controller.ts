@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 
 import { ServiceMultipliersService } from './service-multipliers.service';
-import { CreateServiceMultiplierDto } from './dto/create-service-mutliplier.dto';
+import { CreateServiceMultiplierDto } from './dto/create-service-multiplier.dto';
 import { UpdateServiceMultiplierDto } from './dto/update-service-multiplier.dto';
 
 @Controller('service-multipliers')

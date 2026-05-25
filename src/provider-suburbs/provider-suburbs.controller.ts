@@ -5,7 +5,6 @@ import {
   Delete,
   Body,
   Param,
-  Query,
   Put,
 } from '@nestjs/common';
 import { ProviderSuburbsService } from './provider-suburbs.service';
@@ -26,8 +25,8 @@ export class ProviderSuburbsController {
     return this.service.findAll();
   }
 
-  @Get()
-  findOne(@Query('provider_id') providerId: string) {
+  @Get('provider/:providerId')
+  findByProvider(@Param('providerId') providerId: string) {
     return this.service.findByProvider(providerId);
   }
 

@@ -79,9 +79,7 @@ describe('ServiceSubcategoriesController', () => {
     const expected = { deleted: true };
     service.remove.mockResolvedValue(expected as never);
 
-    await expect(controller.remove('subcategory-1')).resolves.toEqual(
-      expected,
-    );
+    await expect(controller.remove('subcategory-1')).resolves.toEqual(expected);
     expect(service.remove).toHaveBeenCalledWith('subcategory-1');
   });
 });

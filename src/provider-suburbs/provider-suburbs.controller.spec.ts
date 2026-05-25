@@ -20,7 +20,9 @@ describe('ProviderSuburbsController', () => {
       providers: [{ provide: ProviderSuburbsService, useValue: serviceMock }],
     }).compile();
 
-    controller = module.get<ProviderSuburbsController>(ProviderSuburbsController);
+    controller = module.get<ProviderSuburbsController>(
+      ProviderSuburbsController,
+    );
     service = module.get(ProviderSuburbsService);
     jest.clearAllMocks();
   });
@@ -46,7 +48,9 @@ describe('ProviderSuburbsController', () => {
     const expected = [{ id: 'provider-suburb-1', providerId: 'provider-1' }];
     service.findByProvider.mockResolvedValue(expected as never);
 
-    await expect(controller.findOne('provider-1')).resolves.toEqual(expected);
+    await expect(controller.findByProvider('provider-1')).resolves.toEqual(
+      expected,
+    );
     expect(service.findByProvider).toHaveBeenCalledWith('provider-1');
   });
 

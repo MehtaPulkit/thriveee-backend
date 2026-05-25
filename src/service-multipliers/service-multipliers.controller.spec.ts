@@ -17,7 +17,9 @@ describe('ServiceMultipliersController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ServiceMultipliersController],
-      providers: [{ provide: ServiceMultipliersService, useValue: serviceMock }],
+      providers: [
+        { provide: ServiceMultipliersService, useValue: serviceMock },
+      ],
     }).compile();
 
     controller = module.get<ServiceMultipliersController>(

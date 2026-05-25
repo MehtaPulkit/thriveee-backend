@@ -29,7 +29,7 @@ npm install
 Create a local environment file:
 
 ```bash
-cp .env.local .env
+cp .env.example .env
 ```
 
 Update `.env` with your local or Supabase values:
@@ -108,6 +108,7 @@ All routes are prefixed with `/api`.
 | Service configuration | CRUD routes for `/api/service-components`, `/api/service-component-rates`, and `/api/service-multipliers` |
 | Pricing | `GET /api/pricing/services/:serviceId/config`, `POST /api/pricing/calculate` |
 | Providers | CRUD routes for `/api/providers`, `/api/provider-services`, and `/api/provider-suburbs` |
+| Provider suburbs | `GET /api/provider-suburbs/provider/:providerId` |
 | Service explorer | `GET /api/service-explorer/suburb/:suburbId`, `GET /api/service-explorer/suburb-name/:suburbName` |
 | Customers | CRUD routes for `/api/customers` and `/api/customer-addresses` |
 | Bookings | CRUD routes for `/api/bookings`, plus `POST /api/bookings/checkout` |
@@ -143,7 +144,7 @@ Supabase Auth events should be sent to:
 POST /api/supabase-hooks
 ```
 
-The controller accepts the `x-supabase-signature` header, but signature verification is not implemented yet. Treat that as a security follow-up before relying on the webhook in production.
+Webhook signature verification is not implemented yet. Treat that as a security follow-up before relying on the webhook in production.
 
 ## Testing
 

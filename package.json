@@ -1,7 +1,7 @@
 {
   "name": "thriveee-backend",
   "version": "0.0.1",
-  "description": "",
+  "description": "NestJS backend API for the Thriveee marketplace.",
   "author": "",
   "private": true,
   "license": "UNLICENSED",

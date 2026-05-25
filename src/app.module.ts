@@ -30,9 +30,9 @@ import { OrdersModule } from './orders/orders.module';
       type: 'postgres',
       url: process.env.DATABASE_URL,
       autoLoadEntities: true,
-      synchronize: false, // ✅ only for dev! Turn off in production
+      synchronize: false,
       ssl: {
-        rejectUnauthorized: false, // ⚠️ required for Supabase
+        rejectUnauthorized: false,
       },
     }),
     SuburbsModule,

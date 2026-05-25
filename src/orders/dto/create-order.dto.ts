@@ -4,7 +4,6 @@ import {
   IsEnum,
   IsNumber,
   IsString,
-  IsDateString,
 } from 'class-validator';
 import { OrderStatus } from '../order-status.enum';
 

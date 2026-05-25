@@ -17,7 +17,9 @@ describe('ServiceExplorerController', () => {
       providers: [{ provide: ServiceExplorerService, useValue: serviceMock }],
     }).compile();
 
-    controller = module.get<ServiceExplorerController>(ServiceExplorerController);
+    controller = module.get<ServiceExplorerController>(
+      ServiceExplorerController,
+    );
     service = module.get(ServiceExplorerService);
     jest.clearAllMocks();
   });

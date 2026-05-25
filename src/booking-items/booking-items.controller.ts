@@ -8,8 +8,8 @@ import {
   Body,
 } from '@nestjs/common';
 import { BookingItemsService } from './booking-items.service';
-import { CreateBookingItemDto } from './dto/create-booking.dto';
-import { UpdateBookingItemDto } from './dto/update-booking.dto';
+import { CreateBookingItemDto } from './dto/create-booking-item.dto';
+import { UpdateBookingItemDto } from './dto/update-booking-item.dto';
 
 @Controller('booking-items')
 export class BookingItemsController {
